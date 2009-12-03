@@ -6,6 +6,6 @@
   <menuHook
       location="TOOLBAR" text="Insert the UML Gadget."
       iconUrl="http://umlgadget.appspot.com/icon.png"> 
-    <insertGadget url="http://umlgadget.appspot.com/umlapplication/org.modsl.wave.gadget.UMLGraphGadget.gadget.xml" /> 
+    <insertGadget url="http://umlgadget.appspot.com/umlapplication/mr.davidsanderson.uml.wave.gadget.UMLGraphGadget.gadget.xml" />
   </menuHook> 
 </extension> 
