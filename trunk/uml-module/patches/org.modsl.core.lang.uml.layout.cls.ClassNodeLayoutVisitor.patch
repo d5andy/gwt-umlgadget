@@ -1,0 +1,44 @@
+Index: ClassNodeLayoutVisitor.java
+===================================================================
+--- ClassNodeLayoutVisitor.java	(revision 844)
++++ ClassNodeLayoutVisitor.java	(working copy)
+@@ -21,13 +21,14 @@
+ import java.util.Arrays;
+ import java.util.List;
+ 
++import mr.davidsanderson.uml.core.render.Style;
++
+ import org.modsl.core.agt.layout.SimpleNodeLabelLayoutVisitor;
+ import org.modsl.core.agt.model.MetaType;
+ import org.modsl.core.agt.model.Node;
+ import org.modsl.core.agt.model.NodeLabel;
+ import org.modsl.core.agt.model.Pt;
+ import org.modsl.core.lang.uml.UMLMetaType;
+-import org.modsl.core.render.Style;
+ 
+ /**
+  * Node size calculation based on node's text height and width.
+@@ -39,7 +40,6 @@
+     public void apply(Node node) {
+ 
+         NodeLabel hl = getHeaderLabel(node);
+-        log.debug("Setting offset for " + hl);
+ 
+         Style hs = hl.getType().getStyle();
+         hl.setOffset(hs.getLeftPadding(), hs.getTopPadding());
+@@ -56,7 +56,6 @@
+             l.setOffset(vs.getLeftPadding(), var_y + vs.getExtPosition(i));
+             nodeSize.x = max(nodeSize.x, vs.getLeftPadding() + l.getSize().x + vs.getRightPadding());
+             nodeSize.y = l.getOffset().y + vs.getFontHeight();
+-            log.debug("Setting offset for " + l);
+         }
+ 
+         // methods
+@@ -76,7 +75,6 @@
+             l.setOffset(ms.getLeftPadding(), method_y + ms.getExtPosition(i));
+             nodeSize.x = max(nodeSize.x, ms.getLeftPadding() + l.getSize().x + ms.getRightPadding());
+             nodeSize.y = l.getOffset().y + ms.getFontHeight();
+-            log.debug("Setting offset for " + l);
+         }
+ 
+         // final node size adjustments

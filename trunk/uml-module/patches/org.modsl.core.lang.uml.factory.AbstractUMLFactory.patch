@@ -1,0 +1,18 @@
+Index: AbstractUMLFactory.java
+===================================================================
+--- AbstractUMLFactory.java	(revision 844)
++++ AbstractUMLFactory.java	(working copy)
+@@ -16,13 +16,10 @@
+ 
+ package org.modsl.core.lang.uml.factory;
+ 
+-import org.apache.log4j.Logger;
+ import org.modsl.core.lang.ElementFactory;
+ 
+ public abstract class AbstractUMLFactory implements ElementFactory {
+ 
+-    protected Logger log = Logger.getLogger(getClass());
+-
+     public AbstractUMLFactory() {
+         super();
+     }

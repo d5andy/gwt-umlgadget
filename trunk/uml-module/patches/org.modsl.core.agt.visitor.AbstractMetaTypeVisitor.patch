@@ -1,0 +1,20 @@
+Index: AbstractMetaTypeVisitor.java
+===================================================================
+--- AbstractMetaTypeVisitor.java	(revision 844)
++++ AbstractMetaTypeVisitor.java	(working copy)
+@@ -16,7 +16,6 @@
+ 
+ package org.modsl.core.agt.visitor;
+ 
+-import org.apache.log4j.Logger;
+ import org.modsl.core.agt.model.Bend;
+ import org.modsl.core.agt.model.Edge;
+ import org.modsl.core.agt.model.EdgeLabel;
+@@ -27,7 +26,6 @@
+ 
+ public abstract class AbstractMetaTypeVisitor extends AbstractVisitor {
+ 
+-    protected Logger log = Logger.getLogger(getClass());
+     protected MetaType type;
+ 
+     public void apply(Bend bend) {

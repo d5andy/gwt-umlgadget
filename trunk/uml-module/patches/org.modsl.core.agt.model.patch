@@ -1,0 +1,413 @@
+Index: AbstractBox.java
+===================================================================
+--- AbstractBox.java	(revision 844)
++++ AbstractBox.java	(working copy)
+@@ -21,13 +21,20 @@
+ import static java.lang.Math.acos;
+ import static java.lang.Math.signum;
+ 
++import com.google.gwt.user.client.rpc.IsSerializable;
++
+ /**
+  * Abstract rectangle graph element
+  * @author avishnyakov
+  */
+-public abstract class AbstractBox<P extends AbstractElement<?>> extends AbstractElement<P> {
++public abstract class AbstractBox<P extends AbstractElement<?>> extends AbstractElement<P> implements IsSerializable {
+ 
+     /**
++	 * 
++	 */
++	private static final long serialVersionUID = 355366202529643481L;
++
++	/**
+      * Position
+      */
+     Pt pos = new Pt();
+Index: AbstractElement.java
+===================================================================
+--- AbstractElement.java	(revision 844)
++++ AbstractElement.java	(working copy)
+@@ -16,21 +16,26 @@
+ 
+ package org.modsl.core.agt.model;
+ 
++import java.io.Serializable;
+ import java.util.HashMap;
+ import java.util.Map;
+ 
+-import org.apache.log4j.Logger;
+ import org.modsl.core.agt.visitor.AbstractVisitor;
+ 
++import com.google.gwt.user.client.rpc.IsSerializable;
++
+ /**
+  * Abstract graph element
+  * @author avishnyakov
+  */
+-public abstract class AbstractElement<P extends AbstractElement<?>> {
++public abstract class AbstractElement<P extends AbstractElement<?>> implements IsSerializable{
+ 
+-    Logger log = Logger.getLogger(getClass());
++    /**
++	 * 
++	 */
++	private static final long serialVersionUID = -2619413938522776177L;
+ 
+-    /**
++	/**
+      * Name of this object
+      */
+     String name;
+@@ -53,7 +58,7 @@
+     /**
+      * Meta type map for convenient access in the templates
+      */
+-    protected Map<String, Object> metaTypeMap;
++    transient protected Map<String, Object> metaTypeMap;
+ 
+     /**
+      * Create new
+Index: AbstractLabel.java
+===================================================================
+--- AbstractLabel.java	(revision 844)
++++ AbstractLabel.java	(working copy)
+@@ -16,10 +16,20 @@
+ 
+ package org.modsl.core.agt.model;
+ 
+-abstract class AbstractLabel<P extends AbstractElement<?>> extends AbstractBox<P> {
++import com.google.gwt.user.client.rpc.IsSerializable;
+ 
+-    static int counter = 0;
++abstract class AbstractLabel<P extends AbstractElement<?>> extends AbstractBox<P> implements IsSerializable {
+ 
++    /**
++	 * 
++	 */
++	private static final long serialVersionUID = -2240843884256967883L;
++	static int counter = 0;
++	
++	public AbstractLabel() {
++		
++	}
++
+     public AbstractLabel(MetaType type, String name) {
+         super(type, name);
+         this.index = counter++;
+Index: Bend.java
+===================================================================
+--- Bend.java	(revision 844)
++++ Bend.java	(working copy)
+@@ -18,10 +18,16 @@
+ 
+ import org.modsl.core.agt.visitor.AbstractVisitor;
+ 
+-public class Bend extends AbstractBox<Edge> {
++import com.google.gwt.user.client.rpc.IsSerializable;
+ 
+-    private static int counter = 0;
++public class Bend extends AbstractBox<Edge> implements IsSerializable {
+ 
++    /**
++	 * 
++	 */
++	private static final long serialVersionUID = 7985452823650217762L;
++	private static int counter = 0;
++
+     public Bend() {
+         super();
+         this.name = "b" + counter;
+Index: Edge.java
+===================================================================
+--- Edge.java	(revision 844)
++++ Edge.java	(working copy)
+@@ -26,14 +26,21 @@
+ 
+ import org.modsl.core.agt.visitor.AbstractVisitor;
+ 
++import com.google.gwt.user.client.rpc.IsSerializable;
++
+ /**
+  * Graph edge
+  * @author avishnyakov
+  */
+-public class Edge extends AbstractElement<Graph> {
++public class Edge extends AbstractElement<Graph> implements IsSerializable {
+ 
+-    private static int counter = 0;
++    /**
++	 * 
++	 */
++	private static final long serialVersionUID = -3014307337508341924L;
+ 
++	private static int counter = 0;
++
+     /**
+      * Start node
+      */
+@@ -68,6 +75,10 @@
+      * Labels
+      */
+     List<EdgeLabel> labels = new LinkedList<EdgeLabel>();
++    
++    public Edge() {
++    	super();
++    }
+ 
+     /**
+      * Create new
+Index: EdgeLabel.java
+===================================================================
+--- EdgeLabel.java	(revision 844)
++++ EdgeLabel.java	(working copy)
+@@ -18,9 +18,16 @@
+ 
+ import org.modsl.core.agt.visitor.AbstractVisitor;
+ 
+-public class EdgeLabel extends AbstractLabel<Edge> {
++import com.google.gwt.user.client.rpc.IsSerializable;
+ 
+-    public static enum Placement {
++public class EdgeLabel extends AbstractLabel<Edge> implements IsSerializable {
++
++    /**
++	 * 
++	 */
++	private static final long serialVersionUID = -3398903695973413847L;
++
++	public static enum Placement {
+         MID, ANCHOR1, ANCHOR2;
+     }
+ 
+@@ -30,6 +37,10 @@
+     double offset = 0d;
+ 
+     Placement placement = Placement.MID;
++    
++    public EdgeLabel(){
++    	super();
++    }
+ 
+     public EdgeLabel(MetaType type, String name) {
+         super(type, name);
+Index: Graph.java
+===================================================================
+--- Graph.java	(revision 844)
++++ Graph.java	(working copy)
+@@ -23,15 +23,22 @@
+ import java.util.LinkedList;
+ import java.util.List;
+ import java.util.Map;
+-import java.util.Random;
++import com.google.gwt.user.client.Random;
++import com.google.gwt.user.client.rpc.IsSerializable;
+ 
++import mr.davidsanderson.uml.core.render.Style;
++
+ import org.modsl.core.agt.visitor.AbstractVisitor;
+-import org.modsl.core.render.Style;
+ 
+-public class Graph extends AbstractBox<Graph> {
++public class Graph extends AbstractBox<Graph> implements IsSerializable {
+ 
+-    private static int counter = 0;
++    /**
++	 * 
++	 */
++	private static final long serialVersionUID = -3974445948940724591L;
+ 
++	private static int counter = 0;
++
+     /**
+      * List of children nodes
+      */
+@@ -86,6 +93,10 @@
+      * Requested layout type
+      */
+     ReqLayout reqLayout;
++    
++    public Graph() {
++    	super();
++    }
+ 
+     public Graph(MetaType type) {
+         super(type);
+Index: GraphLabel.java
+===================================================================
+--- GraphLabel.java	(revision 844)
++++ GraphLabel.java	(working copy)
+@@ -17,10 +17,20 @@
+ package org.modsl.core.agt.model;
+ 
+ import org.modsl.core.agt.visitor.AbstractVisitor;
++
++import com.google.gwt.user.client.rpc.IsSerializable;
+ 
+-public class GraphLabel extends AbstractLabel<Graph> {
++public class GraphLabel extends AbstractLabel<Graph> implements IsSerializable {
+ 
+-    Pt offset = new Pt(0d, 0d);
++    /**
++	 * 
++	 */
++	private static final long serialVersionUID = -1980728160835210997L;
++	Pt offset = new Pt(0d, 0d);
++	
++	public GraphLabel() {
++		super();
++	}
+ 
+     public GraphLabel(MetaType type, String name) {
+         super(type, name);
+Index: MetaType.java
+===================================================================
+--- MetaType.java	(revision 844)
++++ MetaType.java	(working copy)
+@@ -16,13 +16,15 @@
+ 
+ package org.modsl.core.agt.model;
+ 
+-import org.modsl.core.render.Style;
++import mr.davidsanderson.uml.core.render.Style;
+ 
++import com.google.gwt.user.client.rpc.IsSerializable;
++
+ /**
+  * Marker interface for all element meta types
+  * @author AVishnyakov
+  */
+-public interface MetaType {
++public interface MetaType extends IsSerializable{
+ 
+     public void setStyle(Style style);
+     
+Index: Node.java
+===================================================================
+--- Node.java	(revision 844)
++++ Node.java	(working copy)
+@@ -25,16 +25,23 @@
+ 
+ import org.modsl.core.agt.visitor.AbstractVisitor;
+ 
++import com.google.gwt.user.client.rpc.IsSerializable;
++
+ /**
+  * Graph node
+  * 
+  * @author AVishnyakov
+  * @param <T> type enum
+  */
+-public class Node extends AbstractBox<Graph> {
++public class Node extends AbstractBox<Graph> implements IsSerializable  {
+ 
+-    private static int counter = 0;
++    /**
++	 * 
++	 */
++	private static final long serialVersionUID = 3412863365564020567L;
+ 
++	private static int counter = 0;
++
+     /**
+      * List of connected edges
+      */
+@@ -45,6 +52,10 @@
+      */
+     List<NodeLabel> labels = new LinkedList<NodeLabel>();
+ 
++    public Node() {
++    	
++    }
++    
+     /**
+      * Create new
+      * 
+Index: NodeLabel.java
+===================================================================
+--- NodeLabel.java	(revision 844)
++++ NodeLabel.java	(working copy)
+@@ -18,10 +18,20 @@
+ 
+ import org.modsl.core.agt.visitor.AbstractVisitor;
+ 
+-public class NodeLabel extends AbstractLabel<Node> {
++import com.google.gwt.user.client.rpc.IsSerializable;
+ 
+-    Pt offset = new Pt(0d, 0d);
++public class NodeLabel extends AbstractLabel<Node> implements IsSerializable {
+ 
++    /**
++	 * 
++	 */
++	private static final long serialVersionUID = -2233849191548806938L;
++	Pt offset = new Pt(0d, 0d);
++	
++	public NodeLabel() {
++		super();
++	}
++
+     public NodeLabel(MetaType type, String name) {
+         super(type, name);
+     }
+Index: Pt.java
+===================================================================
+--- Pt.java	(revision 844)
++++ Pt.java	(working copy)
+@@ -20,13 +20,14 @@
+ import static java.lang.Math.round;
+ import static java.lang.Math.sqrt;
+ 
+-import java.util.Random;
++import com.google.gwt.user.client.Random;
++import com.google.gwt.user.client.rpc.IsSerializable;
+ 
+ /**
+  * Represents 2D coordinates
+  * @author avishnyakov
+  */
+-public class Pt {
++public class Pt implements IsSerializable {
+ 
+     /**
+      * "Epsilon" value
+@@ -138,7 +139,7 @@
+ 
+     @Override
+     public int hashCode() {
+-        long bits = 7 + 31 * Double.doubleToLongBits(x) + Double.doubleToLongBits(y);
++        long bits = 7 + 31 * (long)x + (long)y;
+         return (int) (bits ^ (bits >>> 32));
+     }
+ 
+@@ -274,8 +275,8 @@
+      * @param range
+      */
+     public void randomize(Random random, Pt range) {
+-        x = random.nextDouble() * range.x;
+-        y = random.nextDouble() * range.y;
++        x = Random.nextDouble() * range.x;
++        y = Random.nextDouble() * range.y;
+     }
+ 
+     @Override
+Index: ReqLayout.java
+===================================================================
+--- ReqLayout.java	(revision 844)
++++ ReqLayout.java	(working copy)
+@@ -18,12 +18,14 @@
+ 
+ import org.modsl.core.util.Utils;
+ 
++import com.google.gwt.user.client.rpc.IsSerializable;
+ 
++
+ /**
+  * "layout" processing attribute values
+  * @author avishnyakov
+  */
+-public enum ReqLayout {
++public enum ReqLayout implements IsSerializable {
+ 
+     free, ordered;
+ 

@@ -1,0 +1,73 @@
+Index: PropLoader.java
+===================================================================
+--- PropLoader.java	(revision 844)
++++ PropLoader.java	(working copy)
+@@ -25,21 +25,18 @@
+ import java.util.Properties;
+ import java.util.StringTokenizer;
+ 
+-import org.apache.log4j.Logger;
+-
+ /**
+  * Base class for all property loaders
+  * @author avishnyakov
+  */
+ public class PropLoader {
+ 
+-    Logger log = Logger.getLogger(getClass());
+-
+-    Map<String, String> props = new HashMap<String, String>();
++    HashMap<String, String> props = new HashMap<String, String>();
+     List<String> dirs = new ArrayList<String>();
+ 
+     String name;
+     boolean optional;
++	public Properties p;
+ 
+     /**
+      * Create new
+@@ -68,7 +65,7 @@
+     /**
+      * @return map of all properties
+      */
+-    public Map<String, String> getProps() {
++    public HashMap<String, String> getProps() {
+         return props;
+     }
+ 
+@@ -100,14 +97,13 @@
+             if (is == null) {
+                 return;
+             }
+-            Properties p = new Properties();
++            p = new Properties();
+             p.load(is);
+             is.close();
+             for (Map.Entry<Object, Object> me : p.entrySet()) {
+                 props.put((String) me.getKey(), (String) me.getValue());
+             }
+         } catch (IOException ex) {
+-            log.debug("Got exception when loading properties from " + name, ex);
+         }
+     }
+ 
+@@ -121,5 +117,19 @@
+             dirs.add((String) tokenizer.nextElement());
+         }
+     }
++    
++//    public static void main(String[] args) {
++//    	PropLoader propLoader = new PropLoader("cfg/uml:cfg", "uml", true);
++//    	try {
++//    		propLoader.load();
++//			propLoader.p.storeToXML(new FileOutputStream(File.createTempFile("uml", "xml")), "");
++//		} catch (FileNotFoundException e) {
++//			// TODO Auto-generated catch block
++//			e.printStackTrace();
++//		} catch (IOException e) {
++//			// TODO Auto-generated catch block
++//			e.printStackTrace();
++//		}
++//    }
+ 
+ }

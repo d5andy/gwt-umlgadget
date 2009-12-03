@@ -6,7 +6,7 @@
 	<display-name>uml-robot</display-name>
 	<servlet>
 		<servlet-name>UMLGraphRobot</servlet-name>
-		<servlet-class>org.modsl.wave.robot.UMLGraphRobot</servlet-class>
+		<servlet-class>mr.davidsandeson.uml.wave.robot.UMLGraphRobot</servlet-class>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>UMLGraphRobot</servlet-name>
