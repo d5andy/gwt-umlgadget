@@ -1,0 +1,11 @@
+<extension 
+    name="UML-Gadget"
+    description="Draw UML Diagrams Using ModSL"
+    thumbnailUrl="http://umlgadget.appspot.com/preview.png"> 
+  <author name="David Sanderson" /> 
+  <menuHook
+      location="TOOLBAR" text="Insert the UML Gadget."
+      iconUrl="http://umlgadget.appspot.com/icon.png"> 
+    <insertGadget url="http://umlgadget.appspot.com/umlapplication/org.modsl.wave.gadget.UMLGraphGadget.gadget.xml" /> 
+  </menuHook> 
+</extension> 

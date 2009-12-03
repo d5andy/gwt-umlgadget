@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+<comment/>
+<entry key="SEQ_GRAPH.fontStyle">PLAIN </entry>
+<entry key="SEQ_EDGE.strokeColor">105, 105, 105 </entry>
+<entry key="CLASS_ABSTRACT_CLASS_NODE.fontStyle">ITALIC, BOLD</entry>
+<entry key="CLASS_EXTENDS_EDGE.strokeColor">105, 105, 105 </entry>
+<entry key="COLLAB_GRAPH.fontSize">9</entry>
+<entry key="SEQ_NODE.fontStyle">UNDERLINE, BOLD </entry>
+<entry key="SEQ_GRAPH.fillColor">255, 255, 255</entry>
+<entry key="COLLAB_NODE.fontColor">0, 0, 0 </entry>
+<entry key="COLLAB_GRAPH.fontName">Arial</entry>
+<entry key="SEQ_NODE.strokeColor">50, 50, 112  </entry>
+<entry key="SEQ_NODE.fillColor">255, 255, 255 </entry>
+<entry key="CLASS_GRAPH.fontSize">13</entry>
+<entry key="CLASS_AGGREGATION_EDGE.fontStyle">PLAIN </entry>
+<entry key="CLASS_VAR_NODE_LABEL.fontSize">12</entry>
+<entry key="CLASS_CLASS_NODE.fontSize">13</entry>
+<entry key="CLASS_AGGREGATION_EDGE.fillColor">0, 255, 255, 200</entry>
+<entry key="CLASS_GRAPH.fontName">Arial</entry>
+<entry key="CLASS_CLASS_NODE.fontColor">0, 0, 0 </entry>
+<entry key="COLLAB_EDGE.strokeColor">105, 105, 105 </entry>
+<entry key="CLASS_CLASS_NODE.strokeColor">50, 50, 112  </entry>
+<entry key="COLLAB_NODE.fontStyle">UNDERLINE, BOLD </entry>
+<entry key="COLLAB_GRAPH.fontColor">105, 105, 105 </entry>
+<entry key="SEQ_EDGE.fontStyle">PLAIN </entry>
+<entry key="CLASS_GRAPH.fontColor">105, 105, 105 </entry>
+<entry key="CLASS_INTERFACE_NODE.fontStyle">ITALIC </entry>
+<entry key="COLLAB_NODE.fillColor">255, 255, 255</entry>
+<entry key="SEQ_EDGE.fillColor">255, 255, 255, 200</entry>
+<entry key="COLLAB_NODE.strokeColor">50, 50, 112  </entry>
+<entry key="CLASS_ABSTRACT_METHOD_NODE_LABEL.fontStyle">ITALIC</entry>
+<entry key="CLASS_VAR_NODE_LABEL.fontStyle">PLAIN</entry>
+<entry key="COLLAB_NODE.fontSize">12</entry>
+<entry key="CLASS_STATIC_VAR_NODE_LABEL.fontStyle">UNDERLINE</entry>
+<entry key="CLASS_CLASS_NODE.fontStyle">BOLD </entry>
+<entry key="SEQ_NODE.fontSize">12</entry>
+<entry key="SEQ_GRAPH.fontColor">105, 105, 105 </entry>
+<entry key="COLLAB_GRAPH.fontStyle">PLAIN </entry>
+<entry key="SEQ_GRAPH.fontSize">9</entry>
+<entry key="CLASS_GRAPH.fontStyle">PLAIN </entry>
+<entry key="CLASS_CLASS_NODE.fillColor">255, 255, 255</entry>
+<entry key="COLLAB_EDGE.fontStyle">PLAIN </entry>
+<entry key="SEQ_NODE.fontColor">0, 0, 0 </entry>
+<entry key="CLASS_GRAPH.fillColor">255, 255, 255</entry>
+<entry key="COLLAB_GRAPH.fillColor">255, 255, 255</entry>
+<entry key="SEQ_GRAPH.fontName">Arial</entry>
+<entry key="COLLAB_EDGE.fillColor">255, 255, 255, 200</entry>
+<entry key="CLASS_AGGREGATION_EDGE.fontSize">12</entry>
+</properties>
