@@ -41,7 +41,7 @@ public class UMLGraphRobot extends AbstractRobotServlet {
 	 */
 	private static final long serialVersionUID = 8376139623645152337L;
 	Logger logger = Logger.getLogger(UMLGraphRobot.class.getName());
-	static final String gadgetUrl = "http://umlgadget.appspot.com/umlapplication/org.modsl.wave.gadget.UMLGraphGadget.gadget.xml";
+	static final String gadgetUrl = "http://umlgadget.appspot.com/umlapplication/mr.davidsanderson.uml.wave.gadget.UMLGraphGadget.gadget.xml";
 
 	/*
 	 * (non-Javadoc)

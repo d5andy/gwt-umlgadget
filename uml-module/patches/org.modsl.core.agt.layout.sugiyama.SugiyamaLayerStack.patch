@@ -1,0 +1,30 @@
+Index: SugiyamaLayerStack.java
+===================================================================
+--- SugiyamaLayerStack.java	(revision 844)
++++ SugiyamaLayerStack.java	(working copy)
+@@ -31,7 +31,6 @@
+ import java.util.List;
+ import java.util.Map;
+ 
+-import org.apache.log4j.Logger;
+ import org.modsl.core.agt.model.AbstractBox;
+ 
+ /**
+@@ -45,8 +44,6 @@
+     static final double X_SEP = 40;
+     static final double Y_SEP = 75;
+ 
+-    Logger log = Logger.getLogger(getClass());
+-
+     List<List<AbstractBox<?>>> layers;
+     Map<AbstractBox<?>, Integer> nodeMap;
+ 
+@@ -175,7 +172,7 @@
+ 
+     @Override
+     public String toString() {
+-        StringBuilder sb = new StringBuilder(getClass().getSimpleName());
++        StringBuilder sb = new StringBuilder(getClass().getName());
+         sb.append("(").append(layers.size()).append(")");
+         int lc = 0;
+         for (List<AbstractBox<?>> l : layers) {

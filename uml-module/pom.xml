@@ -44,7 +44,7 @@
 			<scope>test</scope>
 		</dependency>
 		<dependency>
-			<groupId>org.modsl.gwt.gadget</groupId>
+			<groupId>mr.davidsanderson.uml</groupId>
 			<artifactId>gwt-antlr</artifactId>
 			<version>1.0-SNAPSHOT</version>
 		</dependency>		

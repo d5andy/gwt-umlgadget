@@ -1,0 +1,35 @@
+Index: FRLayoutVisitor.java
+===================================================================
+--- FRLayoutVisitor.java	(revision 844)
++++ FRLayoutVisitor.java	(working copy)
+@@ -20,9 +20,8 @@
+ import static java.lang.Math.min;
+ import static java.lang.Math.sqrt;
+ 
+-import java.util.Random;
++import com.google.gwt.user.client.Random;
+ 
+-import org.apache.log4j.Logger;
+ import org.modsl.core.agt.layout.AbstractLayoutVisitor;
+ import org.modsl.core.agt.model.AbstractBox;
+ import org.modsl.core.agt.model.Edge;
+@@ -48,7 +47,6 @@
+     static final double ATTR_MULTI = 0.5d;
+     static final double REP_MULTI = 0.75d;
+ 
+-    Logger log = Logger.getLogger(this.getClass());
+ 
+     double temp, kForce, kAttraction, kRepulsion;
+     double minWeight = Double.MAX_VALUE, maxWeight = -Double.MAX_VALUE;
+@@ -63,8 +61,9 @@
+         this.graph = graph;
+         this.req = getOrEsimateGraphReqSize();
+ 
+-        random = new Random(graph.getName().hashCode());
+-        graph.randomize(random);
++        
++        
++        graph.randomize(null);
+ 
+         //calcWeights();
+ 
