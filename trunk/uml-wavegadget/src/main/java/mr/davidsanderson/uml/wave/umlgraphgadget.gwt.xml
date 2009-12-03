@@ -1,0 +1,53 @@
+<!DOCTYPE module PUBLIC "//gwt-module/" "http://google-web-toolkit.googlecode.com/svn/tags/1.6.2/distro-source/core/src/gwt-module.dtd">
+<module rename-to="umlapplication">
+	<!-- Inherit the core Web Toolkit stuff.                        -->
+	<inherits name='com.google.gwt.user.User' />
+	<!--  inherit css based theme -->
+	<inherits name='gwt.g2d.g2d' />
+	<inherits name='org.antlr.antlr' />
+	<inherits name="com.googlecode.gwtx.Java" />
+	<inherits name='org.cobogw.gwt.user.User' />
+	<inherits name='org.cobogw.gwt.waveapi.gadget.WaveGadget' />
+	<inherits name="com.google.gwt.gadgets.Gadgets" />
+	<inherits name="com.allen_sauer.gwt.log.gwt-log-OFF" />
+	<inherits name='mr_davidsanderson_uml' />
+
+
+	<!-- Support for creating Gadgets. -->
+	<define-linker name="gadget1"
+		class="mr.davidsanderson.uml.wave.linker.GadgetLinkerGWT16" />
+	<add-linker name="gadget1" />
+
+	<generate-with
+		class="com.google.gwt.user.rebind.rpc.UberServiceInterfaceProxyGenerator">
+		<when-type-assignable class="com.google.gwt.user.client.rpc.RemoteService" />
+
+	</generate-with>
+	<define-property name="gwt.rpc.proxySuperclass"
+		values="com_google_gwt_user_client_rpc_impl_RpcServiceProxy" />
+	<set-property name="gwt.rpc.proxySuperclass"
+		value="com_google_gwt_user_client_rpc_impl_RpcServiceProxy" />
+
+
+	<!-- Loggers Enabled by default -->
+	<set-property name="log_ConsoleLogger" value="DISABLED" />
+	<set-property name="log_DivLogger" value="DISABLED" />
+	<set-property name="log_FirebugLogger" value="DISABLED" />
+	<set-property name="log_GWTLogger" value="DISABLED" />
+	<set-property name="log_SystemLogger" value="DISABLED" />
+	<set-configuration-property name="log_pattern" value="%d [%-5p] %m%n" />
+
+	<!-- Loggers Disabled by default -->
+	<set-property name="log_RemoteLogger" value="DISABLED" />
+	<set-property name="log_WindowLogger" value="DISABLED" />
+
+	<entry-point class='mr.davidsanderson.uml.wave.gadget.UMLGraphGadget' />
+	<!-- Specify the application specific style sheet.              -->
+	<stylesheet src='Application.css' />
+
+	<source path="gadget">
+		<include name="**/*" />
+	</source>
+
+
+</module>

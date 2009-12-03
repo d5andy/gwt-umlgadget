@@ -1,0 +1,15 @@
+<!DOCTYPE module PUBLIC "//gwt-module/" "http://google-web-toolkit.googlecode.com/svn/tags/1.6.2/distro-source/core/src/gwt-module.dtd">
+<module>
+	  <inherits name='com.google.gwt.user.User'/>
+
+	  <source path="org/modsl">
+	  	<exclude name="**/cfg/**/*"/>
+	  	<exclude name="**/StylePropLoader*"/>
+	  	<exclude name="**/server/**/*"/>
+	  </source>
+	  <source path="mr/davidsanderson">
+	  	<exclude name="**/cfg/**/*"/>
+	  	<exclude name="**/StylePropLoader*"/>
+	  	<exclude name="**/server/**/*"/>
+	  </source>
+</module>

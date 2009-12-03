@@ -1,0 +1,18 @@
+<!DOCTYPE module PUBLIC "//gwt-module/" "http://google-web-toolkit.googlecode.com/svn/tags/1.6.2/distro-source/core/src/gwt-module.dtd">
+<module rename-to='org.antlr'>
+      <!-- Specify the app entry point class.                         -->
+	  <inherits name='com.google.gwt.user.User'/>
+
+	  <source path="runtime">
+	  	<include name="**/*"/>
+		<exclude name="**/ANTLRInputStream*"/>
+		<exclude name="**/ANTLRFileStream*"/>
+		<exclude name="**/ANTLRReaderStream*"/>
+		<exclude name="**/SerializedGrammar*"/>
+		<exclude name="**/debug.DebugEventSocketProxy*"/>
+		<exclude name="**/debug.Profiler*"/>
+		<exclude name="**/debug.RemoteDebugEventSocketListener*"/>
+		<exclude name="**/misc.Stats*"/>
+		<exclude name="**/tree.DOTTreeGenerator*"/>	  	
+	  </source>
+</module>
