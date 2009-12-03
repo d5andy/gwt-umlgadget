@@ -12,7 +12,7 @@
 	<!-- Servlets -->
 	<servlet>
 		<servlet-name>umlGraphService</servlet-name>
-		<servlet-class>org.modsl.wave.server.UMLGraphServiceImpl</servlet-class>
+		<servlet-class>mr.davidsanderson.uml.wave.server.UMLGraphServiceImpl</servlet-class>
 	</servlet>
 
 	<servlet-mapping>
