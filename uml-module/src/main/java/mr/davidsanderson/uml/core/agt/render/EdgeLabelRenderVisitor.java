@@ -26,18 +26,11 @@ public class EdgeLabelRenderVisitor extends AbstractRenderVisitor {
     public void apply(EdgeLabel label) {
         
         Style s = label.getType().getStyle();
-
-//        g.setColor(s.getFillColor());
-//        g.fillRect((int) label.getPos().x, (int) label.getPos().y, (int) label.getSize().x, (int) label.getSize().y);
-//
-//        g.setFont(s.getFont());
-//        g.setColor(s.getFontColor());
-//        g.drawString(label.getName(), (float) label.getTextPos().x, (float) label.getTextPos().y);
         g.setStrokeStyle(s.getGWTStrokeColor())
         .setFont(s.getGWTFont())
         .strokeText(label.getName(), (float) label.getTextPos().x, (float) label.getTextPos().y)
         .setFont(s.getGWTFont())
-        .setFillStyle(s.getGWTFillColor())
+        .setFillStyle(s.getGWTFontColor())
         .fillText(label.getName(), (float) label.getTextPos().x, (float) label.getTextPos().y);
         
     }

@@ -37,8 +37,7 @@ public class NodeLabelRenderVisitor extends AbstractRenderVisitor {
         .setFillStyle(s.getGWTFontColor())
         .fillText(label.getName(), (float) label.getTextPos().x, (float) label.getTextPos().y)
         .setTextBaseline(TextBaseline.TOP)
-        .setTextAlign(TextAlign.START)      
-
+        .setTextAlign(TextAlign.START)
         .setStrokeStyle(s.getGWTFontColor())
         .setFont(s.getGWTFont())
         .strokeText(label.getName(), (float) label.getTextPos().x, (float) label.getTextPos().y);

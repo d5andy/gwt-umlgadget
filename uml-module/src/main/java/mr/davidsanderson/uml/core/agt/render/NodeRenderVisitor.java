@@ -32,14 +32,14 @@ public class NodeRenderVisitor extends AbstractRenderVisitor {
         Gradient gr = s.getGradient();
         if (gr != null) {
         	Log.debug("NodeRenderVisitor.apply gradient " + node.getType().toString());
-        	g.setFillStyle(gr.getGradientPaint((double) node.getPos().x, (double) node.getPos().y, (double) node.getSize().x, (double) node.getSize().y));
+        	g = g.setFillStyle(gr.getGradientPaint(node.getPos(), node.getSize()));
         } else {
         	Log.debug("NodeRenderVisitor.apply no gradient "+ node.getType().toString());
-            g.setFillStyle(s.getGWTFillColor());
+            g = g.setFillStyle(s.getGWTFillColor());
         }
-        g.fillRectangle((double) node.getPos().x, (double) node.getPos().y, (double) node.getSize().x, (double) node.getSize().y);
-        g.setStrokeStyle(s.getGWTStrokeColor());
-        g.strokeRectangle((double) node.getPos().x, (double) node.getPos().y, (double) node.getSize().x, (double) node.getSize().y);
+        g.fillRectangle((double) node.getPos().x, (double) node.getPos().y, (double) node.getSize().x, (double) node.getSize().y)
+        .setStrokeStyle(s.getGWTStrokeColor())
+        .strokeRectangle((double) node.getPos().x, (double) node.getPos().y, (double) node.getSize().x, (double) node.getSize().y);
     }
 
 }

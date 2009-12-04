@@ -138,8 +138,7 @@ public class Style implements Cloneable {
     }
 
     public synchronized String getGWTFont() {
-//        return (fontStyle != null ? fontStyle.toLowerCase() + " " : "") + 
-        return getGWTFontSize() + " "+ fontName.toLowerCase();
+        return (fontStyle != null ? fontStyle.toLowerCase() + " " : "") + getGWTFontSize() + " "+ fontName.toLowerCase(); 
     }
 
     public Color getGWTFontColor() {
