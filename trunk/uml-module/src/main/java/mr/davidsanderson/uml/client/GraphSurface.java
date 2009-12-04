@@ -27,13 +27,14 @@ import mr.davidsanderson.uml.core.render.FontMetrics;
 import com.allen_sauer.gwt.log.client.Log;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
-import com.google.gwt.user.client.ui.RootPanel;
 
 /**
  * @author dsand
  *
  */
 public class GraphSurface extends Surface {
+	
+	private static final String origin = GraphSurface.class.getName();
 	
 	private String xmlContent;
 	private Map<String, String> styles;
@@ -49,6 +50,7 @@ public class GraphSurface extends Surface {
 		FontMetrics.initialise(getCanvas());
 		Log.debug("GraphSurface : constructor");
 		String text = "Starting....";
+		
 		Vector2 position = new Vector2(30, 30);
 		this.setStrokeStyle(KnownColor.BLACK).strokeText(text, position)
 				.setFillStyle(KnownColor.BLACK).fillText(text, position);
@@ -114,7 +116,7 @@ public class GraphSurface extends Surface {
 			int height = this.getHeight();
 			int width = this.getWidth();
 			Log.debug("GraphSurface.draw " + width + "width "+ height + " height");
-			RootPanel.get().setSize("100%", ""+height);
+			GraphEventBus.get().fireEvent(new GraphEvent(origin, GraphEventType.GRAPH_RESIZE, height, width));
 		} else if (xmlContent != null && !xmlContent.equals("")) {
 			Log.debug("GraphSurface.draw : xmlContent empty or null.");
 		} else if (styles != null && !styles.isEmpty()) {

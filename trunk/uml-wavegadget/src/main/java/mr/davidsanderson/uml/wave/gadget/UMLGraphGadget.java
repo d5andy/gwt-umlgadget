@@ -24,26 +24,29 @@ import org.cobogw.gwt.waveapi.gadget.client.WaveGadget;
 
 import com.allen_sauer.gwt.log.client.Log;
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.gadgets.client.DynamicHeightFeature;
 import com.google.gwt.gadgets.client.Gadget;
+import com.google.gwt.gadgets.client.NeedsDynamicHeight;
 import com.google.gwt.gadgets.client.UserPreferences;
-import com.google.gwt.user.client.ui.RootPanel;
 
 /**
  * Entry point classes define <code>onModuleLoad()</code>.
  */
-@Gadget.ModulePrefs(title = "umlgadget", height = 400)
-public class UMLGraphGadget extends WaveGadget<UserPreferences> {
-
+@Gadget.ModulePrefs(title = "umlgadget", height = 400 )
+public class UMLGraphGadget extends WaveGadget<UserPreferences> implements NeedsDynamicHeight {
+	DynamicHeightFeature feature;
 
 	@Override
 	protected void init(UserPreferences preferences) {
 		
 		Log.debug("UMLGraphGadget.init : create UI");
-		RootPanel.get().add(new GraphMainPanel());
+		feature.getContentDiv().add(new GraphMainPanel());
+		new ResizeContainerHandler(feature);
 		Log.debug("UMLGraphGadget.init : new RetrieveServer");
 		new RetrieveServer((UMLGraphServiceAsync) GWT.create(UMLGraphService.class));
 		Log.debug("UMLGraphGadget.init : new WaveStateHandler");
 		new WaveStateHandler(getWave());
+		
 	}
 
 	static {
@@ -54,5 +57,12 @@ public class UMLGraphGadget extends WaveGadget<UserPreferences> {
 	private static native void disableStats() /*-{
 		$wnd.$stats = null;
 	}-*/;
+
+
+	@Override
+	public void initializeFeature(DynamicHeightFeature feature) {
+		// TODO Auto-generated method stub
+		this.feature = feature;
+	}
 
 }
