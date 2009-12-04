@@ -20,6 +20,7 @@ package mr.davidsanderson.uml.core.render;
 //import java.awt.GradientPaint;
 
 import gwt.g2d.client.graphics.Color;
+import gwt.g2d.client.graphics.LinearGradient;
 
 import org.modsl.core.agt.model.Pt;
 
@@ -52,12 +53,18 @@ public class Gradient {
      * @param size
      * @return
      */
-//    public GradientPaint getGradientPaint(Pt pos, Pt size) {
-//        int x1 = (int) (pos.x + start.x / 100d * size.x);
-//        int y1 = (int) (pos.y + start.y / 100d * size.y);
-//        int x2 = (int) (pos.x + end.x / 100d * size.x);
-//        int y2 = (int) (pos.y + end.y / 100d * size.y);
-//        return new GradientPaint(x1, y1, startColor, x2, y2, endColor);
-//    }
+    public LinearGradient getGradientPaint(Pt pos, Pt size) {
+        double x1 = pos.x + start.x / 100d * size.x;
+        double y1 = pos.y + start.y / 100d * size.y;
+        double x2 = pos.x + end.x / 100d * size.x;
+        double y2 = pos.y + end.y / 100d * size.y;
+    	return this.getGradientPaint(x1, y1, x2, y2);
+    }
+    public LinearGradient getGradientPaint(double x1, double y1, double x2, double y2) {
+        LinearGradient linearGradient = new LinearGradient(x1, y1, x2, y2);
+        linearGradient.addColorStop(0, startColor);
+        linearGradient.addColorStop(1, endColor);
+        return linearGradient; 
+    }
 
 }

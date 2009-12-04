@@ -23,16 +23,22 @@ import mr.davidsanderson.uml.core.render.Style;
 
 import org.modsl.core.agt.model.NodeLabel;
 
+import com.allen_sauer.gwt.log.client.Log;
+
 public class NodeLabelRenderVisitor extends AbstractRenderVisitor {
 
     @Override
     public void apply(NodeLabel label) {
         Style s = label.getType().getStyle();
+        Log.debug("NodeLabelRenderVisitor " + s.getGWTFont() + " " + label.getType().toString());
         g.setTextBaseline(TextBaseline.TOP)
         .setTextAlign(TextAlign.START)
         .setFont(s.getGWTFont())
         .setFillStyle(s.getGWTFontColor())
         .fillText(label.getName(), (float) label.getTextPos().x, (float) label.getTextPos().y)
+        .setTextBaseline(TextBaseline.TOP)
+        .setTextAlign(TextAlign.START)      
+
         .setStrokeStyle(s.getGWTFontColor())
         .setFont(s.getGWTFont())
         .strokeText(label.getName(), (float) label.getTextPos().x, (float) label.getTextPos().y);

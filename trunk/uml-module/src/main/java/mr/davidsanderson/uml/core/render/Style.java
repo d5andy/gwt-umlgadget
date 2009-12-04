@@ -37,7 +37,7 @@ public class Style implements Cloneable {
     Color strokeColor;
 
     Color fillColor;
-    String gradient;
+    Gradient gradient;
     
     public Style() {
     	super();
@@ -45,7 +45,7 @@ public class Style implements Cloneable {
     
     public Style(String fontName, Integer fontSize, String fontStyle,
 			Color fontColor, boolean underline, float strokeWidth,
-			Color strokeColor, Color fillColor, String gradient) {
+			Color strokeColor, Color fillColor, Gradient gradient) {
 		super();
 		this.fontName = fontName;
 		this.fontSize = fontSize;
@@ -117,7 +117,7 @@ public class Style implements Cloneable {
      * @return string width in pixels if rendered with given fond style and size
      * plus necessary padding on the sides
      */
-    public int getExtStringWidth(String str) {
+    public double getExtStringWidth(String str) {
         return getLeftPadding() + getStringWidth(str) + getRightPadding();
     }
 
@@ -138,7 +138,8 @@ public class Style implements Cloneable {
     }
 
     public synchronized String getGWTFont() {
-        return (fontStyle != null ? fontStyle.toLowerCase() + " " : "") + getGWTFontSize() + " "+ fontName.toLowerCase();
+//        return (fontStyle != null ? fontStyle.toLowerCase() + " " : "") + 
+        return getGWTFontSize() + " "+ fontName.toLowerCase();
     }
 
     public Color getGWTFontColor() {
@@ -185,7 +186,7 @@ public class Style implements Cloneable {
         return fontStyle;
     }
 
-    public String getGWTGradient() {
+    public Gradient getGradient() {
         return gradient;
     }
 
@@ -207,8 +208,8 @@ public class Style implements Cloneable {
      * @param str
      * @return string width in pixels if rendered with given fond style and size
      */
-    public int getStringWidth(String str) {
-        return str.length() * getFontSize();//getFontMetrics().stringWidth(str);
+    public double getStringWidth(String str) {
+        return FontMetrics.getStringLength(str, getGWTFont());
     }
 
     /**

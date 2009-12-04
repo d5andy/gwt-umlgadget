@@ -20,6 +20,7 @@ import static java.lang.Math.max;
 import static java.lang.Math.min;
 import static java.lang.Math.sqrt;
 
+import com.allen_sauer.gwt.log.client.Log;
 import com.google.gwt.user.client.Random;
 
 import org.modsl.core.agt.layout.AbstractLayoutVisitor;
@@ -57,6 +58,7 @@ public class FRLayoutVisitor extends AbstractLayoutVisitor {
 
     @Override
     public void apply(Graph graph) {
+    	Log.debug("FRLayoutVisitor.apply");
 
         this.graph = graph;
         this.req = getOrEsimateGraphReqSize();

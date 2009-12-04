@@ -58,7 +58,7 @@ public abstract class AbstractElement<P extends AbstractElement<?>> implements I
     /**
      * Meta type map for convenient access in the templates
      */
-    transient protected Map<String, Object> metaTypeMap;
+    protected Map<String, Object> metaTypeMap;
 
     /**
      * Create new

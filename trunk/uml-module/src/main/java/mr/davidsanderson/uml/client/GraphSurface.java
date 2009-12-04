@@ -22,10 +22,12 @@ import gwt.g2d.client.math.Vector2;
 import java.util.Map;
 
 import mr.davidsanderson.uml.client.GraphEvent.GraphEventType;
+import mr.davidsanderson.uml.core.render.FontMetrics;
 
 import com.allen_sauer.gwt.log.client.Log;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.user.client.ui.RootPanel;
 
 /**
  * @author dsand
@@ -43,6 +45,8 @@ public class GraphSurface extends Surface {
 	 */
 	public GraphSurface() {
 		super(600,600);
+//		setSize("100%", "100%");
+		FontMetrics.initialise(getCanvas());
 		Log.debug("GraphSurface : constructor");
 		String text = "Starting....";
 		Vector2 position = new Vector2(30, 30);
@@ -107,6 +111,10 @@ public class GraphSurface extends Surface {
 			this.clear();
 			Log.debug("GraphSurface.draw UMLGraphHelper.drawDiagram");
 			new UMLGraphHelper().drawDiagram(xmlContent, styles, this);
+			int height = this.getHeight();
+			int width = this.getWidth();
+			Log.debug("GraphSurface.draw " + width + "width "+ height + " height");
+			RootPanel.get().setSize("100%", ""+height);
 		} else if (xmlContent != null && !xmlContent.equals("")) {
 			Log.debug("GraphSurface.draw : xmlContent empty or null.");
 		} else if (styles != null && !styles.isEmpty()) {

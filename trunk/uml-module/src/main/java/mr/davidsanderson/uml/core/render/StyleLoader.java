@@ -76,7 +76,7 @@ public class StyleLoader {
             }
             if ((p = getProp(props, mt.toString() + ".fillColor")) != null) {
                 last.fillColor = decodeColor(p);
-                last.gradient = p;//decodeGradient(p);
+                last.gradient = decodeGradient(p);
             }
             mt.setStyle((Style) last.clone());
         }
@@ -105,25 +105,25 @@ public class StyleLoader {
         }
     }
 
-//    /**
-//     * Decodes string x1, y1, r, g, b[, alpha], x2, y2, r, g, b[, alpha] into a
-//     * Gradient object
-//     * @param string
-//     * @return color object
-//     */
-//    Gradient decodeGradient(String p) {
-//        StringTokenizer st = new StringTokenizer(p, ",");
-//        int cnt = st.countTokens();
-//        if (cnt < 10) {
-//            return null;
-//        }
-//        int[] d = new int[cnt];
-//        int tokens = 0;
-//        while (st.hasMoreTokens()) {
-//            d[tokens] = Integer.parseInt(st.nextToken().trim());
-//            tokens++;
-//        }
-//        return new Gradient(d);
-//    }
+    /**
+     * Decodes string x1, y1, r, g, b[, alpha], x2, y2, r, g, b[, alpha] into a
+     * Gradient object
+     * @param string
+     * @return color object
+     */
+    Gradient decodeGradient(String p) {
+        StringTokenizer st = new StringTokenizer(p, ",");
+        int cnt = st.countTokens();
+        if (cnt < 10) {
+            return null;
+        }
+        int[] d = new int[cnt];
+        int tokens = 0;
+        while (st.hasMoreTokens()) {
+            d[tokens] = Integer.parseInt(st.nextToken().trim());
+            tokens++;
+        }
+        return new Gradient(d);
+    }
 
 }

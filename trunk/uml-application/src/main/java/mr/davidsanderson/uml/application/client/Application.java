@@ -44,6 +44,8 @@ public class Application implements EntryPoint {
 	
 	public void onModuleLoad() {
 		new RetrieveServer((UMLGraphServiceAsync) GWT.create(UMLGraphService.class));
+		
+		RootPanel.get().setStyleName("gwt-rootPanel");
 		RootPanel.get().add(new GraphMainPanel());
 	}
 	

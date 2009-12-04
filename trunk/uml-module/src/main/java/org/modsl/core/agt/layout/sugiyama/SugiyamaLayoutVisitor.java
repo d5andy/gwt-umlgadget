@@ -35,6 +35,8 @@ import org.modsl.core.agt.model.Graph;
 import org.modsl.core.agt.model.Node;
 import org.modsl.core.util.ModSLException;
 
+import com.allen_sauer.gwt.log.client.Log;
+
 /**
  * Sugiyama layout algorithm
  * @author avishnyakov
@@ -46,6 +48,7 @@ public class SugiyamaLayoutVisitor extends AbstractLayoutVisitor {
 
     @Override
     public void apply(Graph graph) {
+    	Log.debug("SugiyamaLayoutVisitor.apply");
         this.graph = graph;
         removeCycles();
         splitIntoLayers();

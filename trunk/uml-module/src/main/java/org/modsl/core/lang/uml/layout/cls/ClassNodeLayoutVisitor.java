@@ -30,6 +30,8 @@ import org.modsl.core.agt.model.NodeLabel;
 import org.modsl.core.agt.model.Pt;
 import org.modsl.core.lang.uml.UMLMetaType;
 
+import com.allen_sauer.gwt.log.client.Log;
+
 /**
  * Node size calculation based on node's text height and width.
  * @author avishnyakov
@@ -40,6 +42,7 @@ public class ClassNodeLayoutVisitor extends SimpleNodeLabelLayoutVisitor {
     public void apply(Node node) {
 
         NodeLabel hl = getHeaderLabel(node);
+        Log.debug(hl.getName() + ":" + hl.getSize().toString());
 
         Style hs = hl.getType().getStyle();
         hl.setOffset(hs.getLeftPadding(), hs.getTopPadding());
@@ -56,6 +59,7 @@ public class ClassNodeLayoutVisitor extends SimpleNodeLabelLayoutVisitor {
             l.setOffset(vs.getLeftPadding(), var_y + vs.getExtPosition(i));
             nodeSize.x = max(nodeSize.x, vs.getLeftPadding() + l.getSize().x + vs.getRightPadding());
             nodeSize.y = l.getOffset().y + vs.getFontHeight();
+            Log.debug(hl.getName() + ":" +nodeSize.x);
         }
 
         // methods
@@ -75,6 +79,7 @@ public class ClassNodeLayoutVisitor extends SimpleNodeLabelLayoutVisitor {
             l.setOffset(ms.getLeftPadding(), method_y + ms.getExtPosition(i));
             nodeSize.x = max(nodeSize.x, ms.getLeftPadding() + l.getSize().x + ms.getRightPadding());
             nodeSize.y = l.getOffset().y + ms.getFontHeight();
+            Log.debug(hl.getName() + ":" +nodeSize.x);
         }
 
         // final node size adjustments

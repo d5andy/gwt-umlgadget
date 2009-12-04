@@ -16,9 +16,12 @@
 
 package mr.davidsanderson.uml.core.agt.render;
 
+import mr.davidsanderson.uml.core.render.Gradient;
 import mr.davidsanderson.uml.core.render.Style;
 
 import org.modsl.core.agt.model.Node;
+
+import com.allen_sauer.gwt.log.client.Log;
 
 
 public class NodeRenderVisitor extends AbstractRenderVisitor {
@@ -26,19 +29,17 @@ public class NodeRenderVisitor extends AbstractRenderVisitor {
     @Override
     public void apply(Node node) {
         Style s = (Style)node.getType().getStyle();
-//        Gradient gr = null;//s.getGradient();
-//        if (gr != null) {
-////            GradientPaint gpt = gr.getGradientPaint(node.getPos(), node.getSize());
-////            g.setPaint(gpt);
-//        } else {
-//            g.setFillStyle(s.getGWTFillColor());
-//        }
-        g.setFillStyle(s.getGWTFillColor());
-        g.fillRectangle((double) node.getPos().x, (double) node.getPos().y, (double) node.getSize().x, (double) node.getSize().y);//, 4, 4);
+        Gradient gr = s.getGradient();
+        if (gr != null) {
+        	Log.debug("NodeRenderVisitor.apply gradient " + node.getType().toString());
+        	g.setFillStyle(gr.getGradientPaint((double) node.getPos().x, (double) node.getPos().y, (double) node.getSize().x, (double) node.getSize().y));
+        } else {
+        	Log.debug("NodeRenderVisitor.apply no gradient "+ node.getType().toString());
+            g.setFillStyle(s.getGWTFillColor());
+        }
+        g.fillRectangle((double) node.getPos().x, (double) node.getPos().y, (double) node.getSize().x, (double) node.getSize().y);
         g.setStrokeStyle(s.getGWTStrokeColor());
         g.strokeRectangle((double) node.getPos().x, (double) node.getPos().y, (double) node.getSize().x, (double) node.getSize().y);
-       
-//        g.drawRoundRect((int) node.getPos().x, (int) node.getPos().y, (int) node.getSize().x, (int) node.getSize().y, 4, 4);
     }
 
 }
