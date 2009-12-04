@@ -27,19 +27,27 @@ public class GraphEvent extends GwtEvent<GraphEventHandler> {
 	private static final Type<GraphEventHandler> TYPE = new Type<GraphEventHandler>();
 	
 	public enum GraphEventType {
-		EDITOR_CLOSE, CONTENT_CHANGED, EDITOR_OPEN, SERVICE_SUCCESS, SERVICE_FAIL
+		EDITOR_CLOSE, CONTENT_CHANGED, EDITOR_OPEN, SERVICE_SUCCESS, SERVICE_FAIL, GRAPH_RESIZE
 	}
 	
 	private String umlContent;
 	private UMLGraph graph;
 	private String origin;
 	GraphEventType type;
+	private int height;
+	private int width;
 	
 	
 	public GraphEvent(String origin, GraphEventType type) {
 		this.origin = origin;
 		this.type = type;
 	}
+	public GraphEvent(String origin, GraphEventType type, int height, int width) {
+		this.origin = origin;
+		this.type = type;
+		this.setHeight(height);
+		this.setWidth(width);
+	}	
 	
 	public GraphEvent(String origin, String umlContent, GraphEventType type) {
 		this.origin = origin;
@@ -60,7 +68,7 @@ public class GraphEvent extends GwtEvent<GraphEventHandler> {
 		// TODO Auto-generated method stub
 		Log.debug("GraphEvent.dispatch : " + type);
 		switch (type) {
-		case EDITOR_CLOSE: case EDITOR_OPEN:			
+		case EDITOR_CLOSE: case EDITOR_OPEN: case GRAPH_RESIZE: 			
 			handler.onEdit(this);
 			break;
 		case CONTENT_CHANGED:
@@ -110,6 +118,18 @@ public class GraphEvent extends GwtEvent<GraphEventHandler> {
 
 	public String getOrigin() {
 		return origin;
+	}
+	public void setHeight(int height) {
+		this.height = height;
+	}
+	public int getHeight() {
+		return height;
+	}
+	public void setWidth(int width) {
+		this.width = width;
+	}
+	public int getWidth() {
+		return width;
 	}
 	
 	

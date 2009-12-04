@@ -9,7 +9,7 @@
 	<inherits name='org.cobogw.gwt.user.User' />
 	<inherits name='org.cobogw.gwt.waveapi.gadget.WaveGadget' />
 	<inherits name="com.google.gwt.gadgets.Gadgets" />
-	<inherits name="com.allen_sauer.gwt.log.gwt-log-OFF" />
+	<inherits name="com.allen_sauer.gwt.log.gwt-log-DEBUG" />
 	<inherits name='mr_davidsanderson_uml' />
 
 
@@ -30,7 +30,7 @@
 
 
 	<!-- Loggers Enabled by default -->
-	<set-property name="log_ConsoleLogger" value="DISABLED" />
+	<set-property name="log_ConsoleLogger" value="ENABLED" />
 	<set-property name="log_DivLogger" value="DISABLED" />
 	<set-property name="log_FirebugLogger" value="DISABLED" />
 	<set-property name="log_GWTLogger" value="DISABLED" />
