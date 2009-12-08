@@ -29,7 +29,9 @@ import com.google.gwt.user.server.rpc.GadgetServiceServlet;
  */
 public class UMLGraphServiceImpl extends GadgetServiceServlet implements
 		UMLGraphService {
-
+	
+	private static StylePropLoader stl;
+	
 	/**
 	 * 
 	 */
@@ -37,8 +39,14 @@ public class UMLGraphServiceImpl extends GadgetServiceServlet implements
 
 	@Override
 	public UMLGraph getUMLStyles() {
-		StylePropLoader stl = new StylePropLoader();
-		stl.load("cfg/uml:cfg", "uml", UMLMetaType.class);
-		return new UMLGraph(stl.getProps());
-	}	
+		return new UMLGraph(getStl().getProps());
+	}
+	
+	private static StylePropLoader getStl() {
+		if (stl == null) {
+			stl = new StylePropLoader();
+			stl.load("cfg/uml:cfg", "uml", UMLMetaType.class);
+		}
+		return stl;
+	}
 }

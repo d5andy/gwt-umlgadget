@@ -27,6 +27,7 @@ import mr.davidsanderson.uml.core.render.FontMetrics;
 import com.allen_sauer.gwt.log.client.Log;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.user.client.Window;
 
 /**
  * @author dsand
@@ -45,7 +46,7 @@ public class GraphSurface extends Surface {
 	 * GraphSurface.
 	 */
 	public GraphSurface() {
-		super(600,600);
+		super(400,400);
 //		setSize("100%", "100%");
 		FontMetrics.initialise(getCanvas());
 		Log.debug("GraphSurface : constructor");
@@ -85,6 +86,10 @@ public class GraphSurface extends Surface {
 		@Override
 		public void onEdit(GraphEvent event) {
 			// TODO Auto-generated method stub
+			if (event.getEventType().equals(GraphEventType.SAVE)) {
+				Window.alert("To be implemented");
+//				Window.open(getCanvas()., arg1, arg2)
+			}
 			
 		}
 

@@ -27,7 +27,7 @@ public class GraphEvent extends GwtEvent<GraphEventHandler> {
 	private static final Type<GraphEventHandler> TYPE = new Type<GraphEventHandler>();
 	
 	public enum GraphEventType {
-		EDITOR_CLOSE, CONTENT_CHANGED, EDITOR_OPEN, SERVICE_SUCCESS, SERVICE_FAIL, GRAPH_RESIZE
+		EDITOR_CLOSE, CONTENT_CHANGED, EDITOR_OPEN, SERVICE_SUCCESS, SERVICE_FAIL, GRAPH_RESIZE, SAVE
 	}
 	
 	private String umlContent;
@@ -68,7 +68,7 @@ public class GraphEvent extends GwtEvent<GraphEventHandler> {
 		// TODO Auto-generated method stub
 		Log.debug("GraphEvent.dispatch : " + type);
 		switch (type) {
-		case EDITOR_CLOSE: case EDITOR_OPEN: case GRAPH_RESIZE: 			
+		case EDITOR_CLOSE: case EDITOR_OPEN: case GRAPH_RESIZE: case SAVE: 			
 			handler.onEdit(this);
 			break;
 		case CONTENT_CHANGED:
