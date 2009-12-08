@@ -52,6 +52,19 @@ public class GraphPopupMenu extends PopupPanel {
 		});
 		alertItem.addStyleName("popup-item");
 		popupMenuBar.addItem(alertItem);
+		MenuItem saveItem = new MenuItem("Save as image", true, new Command() {
+
+			@Override
+			public void execute() {
+				Log.debug("GraphPopupMenu : show ModSL UML fire event.");
+				GraphEventBus.get().fireEvent(new GraphEvent(origin, GraphEventType.SAVE));
+				Log.debug("GraphPopupMenu : show ModSL UML hide.");
+				GraphPopupMenu.this.hide();
+			}
+			
+		});
+		saveItem.addStyleName("popup-item");
+		popupMenuBar.addItem(saveItem);
 		popupMenuBar.setVisible(true);
 		this.add(popupMenuBar);
 				

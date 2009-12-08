@@ -29,5 +29,16 @@
 		<servlet-name>gwt-log-remote-logger-servlet</servlet-name>
 		<url-pattern>/umlapplication/gwt-log</url-pattern>
 	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>applicationServlet</servlet-name>
+		<servlet-class>mr.davidsanderson.uml.server.ApplicationServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>applicationServlet</servlet-name>
+		<url-pattern>/umlapplication/applicationServlet</url-pattern>
+	</servlet-mapping>
+	
 
 </web-app>
