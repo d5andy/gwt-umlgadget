@@ -20,7 +20,7 @@ import java.util.HashMap;
 import com.google.gwt.user.client.rpc.IsSerializable;
 
 public class UMLGraph implements IsSerializable {
-	HashMap<String, String> styles;
+	public HashMap<String, String> styles;
 	
 	public UMLGraph() {
 		

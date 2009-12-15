@@ -15,10 +15,8 @@
   */
 package mr.davidsanderson.uml.client;
 
-import com.allen_sauer.gwt.log.client.Log;
 import com.google.gwt.event.shared.EventHandler;
 import com.google.gwt.event.shared.GwtEvent;
-import com.google.gwt.event.shared.HandlerManager;
 import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.event.shared.GwtEvent.Type;
 
@@ -26,20 +24,7 @@ import com.google.gwt.event.shared.GwtEvent.Type;
  * @author dsand
  *
  */
-public class GraphEventBus {
-	   private HandlerManager handlerManager;
-	   
-	   private static GraphEventBus instance;
-	   
-	   public static GraphEventBus get() {
-		   return instance != null ? instance :  newInstance();
-	   }
-	   
-	   private static final GraphEventBus newInstance() {
-		   Log.debug("GraphEventBus.newInstance");
-		   instance = new GraphEventBus(); 		   
-		   return instance;
-	   }
+public interface GraphEventBus {
 	   
 	   /**
 	    * Adds this handler to the widget.
@@ -50,27 +35,11 @@ public class GraphEventBus {
 	    * @return {@link HandlerRegistration} used to remove the handler
 	    */
 	   //copied from GWT 1.6 Widget
-	   public final <H extends EventHandler> HandlerRegistration addHandler(final H handler, Type<H> type){
-	      return ensureHandlers().addHandler(type, handler);
-	   }
-	 
-	   /**
-	    * Ensures the existence of the handler manager.
-	    *
-	    * @return the handler manager
-	    * */
-	   //copied from GWT 1.6 Widget
-	   private HandlerManager ensureHandlers(){
-	      return handlerManager == null ? handlerManager = new HandlerManager(this) : handlerManager;
-	   }
-	 
-
+	   public <H extends EventHandler> HandlerRegistration addHandler(final H handler, Type<H> type);
 	 
 	   /**
 	    * Fire an event.
 	    */
-	   public void fireEvent(GwtEvent<?> event){
-	      handlerManager.fireEvent(event);
-	   }	
+	   public void fireEvent(GwtEvent<?> event);
 
 }

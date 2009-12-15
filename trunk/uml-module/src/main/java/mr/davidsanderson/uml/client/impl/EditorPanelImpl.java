@@ -12,10 +12,12 @@
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
  * License for the specific language governing permissions and limitations under
  * the License.
-  */
-package mr.davidsanderson.uml.client;
+ */
+package mr.davidsanderson.uml.client.impl;
 
-
+import mr.davidsanderson.uml.client.GraphEvent;
+import mr.davidsanderson.uml.client.GraphEventBus;
+import mr.davidsanderson.uml.client.GraphEventHandler;
 import mr.davidsanderson.uml.client.GraphEvent.GraphEventType;
 
 import com.allen_sauer.gwt.log.client.Log;
@@ -27,25 +29,23 @@ import com.google.gwt.user.client.ui.DockPanel;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.TextArea;
+import com.google.inject.Inject;
 
-/**
- * @author dsand
- *
- */
-public class UMLEditorPanel extends DockPanel {
+public class EditorPanelImpl extends DockPanel {
 
 	private TextArea textArea;
-	private static final String origin = UMLEditorPanel.class.getName();
+	private static final String origin = EditorPanelImpl.class.getName();
 	private boolean editing = false;
+	private GraphEventBus graphEventBus;
 
 	/**
 	 * 
 	 */
-	public UMLEditorPanel() {
-		super();
+	@Inject
+	public EditorPanelImpl(final GraphEventBus graphEventBus) {
 		Log.debug("UMLEditorPanel : start");
-		
-		GraphEventBus.get().addHandler(eventHandler, GraphEvent.getType());
+		this.graphEventBus = graphEventBus;
+		graphEventBus.addHandler(eventHandler, GraphEvent.getType());
 		// set editor
 		this.setSpacing(5);
 		this.setSize("100%", "100%");
@@ -61,20 +61,20 @@ public class UMLEditorPanel extends DockPanel {
 
 					@Override
 					public void onClick(ClickEvent arg0) {
-						UMLEditorPanel.this.editing = false;
+						EditorPanelImpl.this.editing = false;
 						Log.debug("UMLEditorPanel.okBtn.onClick : fire event close editor");
-						GraphEventBus.get().fireEvent(new GraphEvent(origin, GraphEventType.EDITOR_CLOSE));
+						graphEventBus.fireEvent(new GraphEvent(origin, GraphEventType.EDITOR_CLOSE));
 						Log.debug("UMLEditorPanel.okBtn.onClick : fire content changed");
-						GraphEventBus.get().fireEvent(new GraphEvent(origin, textArea.getText(),
+						graphEventBus.fireEvent(new GraphEvent(origin, textArea.getText(),
 								GraphEventType.CONTENT_CHANGED));
 					}
 				});
 		Button cancelBtn = new Button(new HTML("Cancel").toString(),
 				new ClickHandler() {
 					public void onClick(ClickEvent arg0) {
-						UMLEditorPanel.this.editing = false;
+						EditorPanelImpl.this.editing = false;
 						Log.debug("UMLEditorPanel.cancelBtn.onClick : fire event close editor");
-						GraphEventBus.get().fireEvent(new GraphEvent(origin, GraphEventType.EDITOR_CLOSE));
+						graphEventBus.fireEvent(new GraphEvent(origin, GraphEventType.EDITOR_CLOSE));
 					}
 				});
 		buttonPanel.add(okBtn);
@@ -107,7 +107,7 @@ public class UMLEditorPanel extends DockPanel {
 		@Override
 		public void onEdit(GraphEvent event) {
 			if (event.getEventType().equals(GraphEventType.EDITOR_OPEN)) {
-				UMLEditorPanel.this.editing = true;
+				EditorPanelImpl.this.editing = true;
 			}
 		}
 
@@ -129,7 +129,7 @@ public class UMLEditorPanel extends DockPanel {
 				public void onClick(ClickEvent arg0) {
 					EditingDialog.this.hide();
 					
-					UMLEditorPanel.this.textArea.setText(umlContent);
+					EditorPanelImpl.this.textArea.setText(umlContent);
 					
 				}
 				

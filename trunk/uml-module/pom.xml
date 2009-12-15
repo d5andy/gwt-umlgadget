@@ -20,7 +20,7 @@
 
 	</properties>
 
-   	<dependencies>
+	<dependencies>
 
 		<!--  GWT dependencies (from central repo) -->
 		<dependency>
@@ -47,14 +47,14 @@
 			<groupId>mr.davidsanderson.uml</groupId>
 			<artifactId>gwt-antlr</artifactId>
 			<version>1.0-SNAPSHOT</version>
-		</dependency>		
+		</dependency>
 
 
-<!--		<dependency>-->
-<!--			<groupId>org.antlr</groupId>-->
-<!--			<artifactId>antlr-runtime</artifactId>-->
-<!--			<version>3.0</version>-->
-<!--		</dependency>-->
+		<!--		<dependency>-->
+		<!--			<groupId>org.antlr</groupId>-->
+		<!--			<artifactId>antlr-runtime</artifactId>-->
+		<!--			<version>3.0</version>-->
+		<!--		</dependency>-->
 		<dependency>
 			<groupId>com.google.gwt</groupId>
 			<artifactId>gwt-g2d</artifactId>
@@ -84,22 +84,52 @@
 			<systemPath>${basedir}/lib/gwt-log-2.6.2.jar</systemPath>
 		</dependency>
 
+		<dependency>
+			<groupId>com.google.gwt</groupId>
+			<artifactId>gwt-log</artifactId>
+			<version>2.6.2</version>
+			<scope>system</scope>
+			<systemPath>${basedir}/lib/gwt-log-2.6.2.jar</systemPath>
+		</dependency>
+		<dependency>
+			<groupId>aopalliance</groupId>
+			<artifactId>aopalliance</artifactId>
+			<version>1.0</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.google.code.guice</groupId>
+			<artifactId>guice</artifactId>
+			<version>2.0.1</version>
+		</dependency>
+		<!--
 
+			<dependency> <groupId>com.google.inject</groupId>
+			<artifactId>guice</artifactId> <version>1.0</version>
+			<scope>provided</scope> </dependency>
+		-->
+
+		<dependency>
+			<groupId>com.google.gwt</groupId>
+			<artifactId>google-gin</artifactId>
+			<version>1.0-SNAPSHOT</version>
+			<scope>provided</scope>
+		</dependency>
 
 	</dependencies>
 
 	<build>
-   <resources>
-      <resource>
-         <directory>src/main/java</directory>
-         <includes>
-            <include>*/**</include>
-         </includes>
-      </resource>
-      <resource>
-         <directory>src/main/resources</directory>
-      </resource>
-   </resources>	
+		<resources>
+			<resource>
+				<directory>src/main/java</directory>
+				<includes>
+					<include>*/**</include>
+				</includes>
+			</resource>
+			<resource>
+				<directory>src/main/resources</directory>
+			</resource>
+		</resources>
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -112,16 +142,85 @@
 			</plugin>
 		</plugins>
 	</build>
-    <pluginRepositories>
-        <pluginRepository>
-            <id>gwt-maven</id>
-            <url>http://gwt-maven.googlecode.com/svn/trunk/mavenrepo</url>
-        </pluginRepository>
-    </pluginRepositories>
-    <repositories>
-        <repository>
-            <id>gwt-maven</id>
-            <url>http://gwt-maven.googlecode.com/svn/trunk/mavenrepo</url>
-        </repository>
-    </repositories>
+
+	<profiles>
+		<profile>
+			<id>application</id>
+			<dependencies>
+
+			</dependencies>
+			<build>
+
+				<plugins>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-war-plugin</artifactId>
+						<configuration>
+							<webXml>src/main/webapp/WEB-INF/web.xml</webXml>
+							<attachClasses>true</attachClasses>
+							<warSourceExcludes>.gwt-tmp/**</warSourceExcludes>
+							<webappDirectory>${basedir}/war</webappDirectory>
+						</configuration>
+						<!-- 
+						<executions>
+							<execution>
+								<phase>install</phase>
+								<goals>exploded</goals>	
+														
+							</execution>						
+						</executions>
+						 -->
+					</plugin>
+					<plugin>
+						<groupId>org.codehaus.mojo</groupId>
+						<artifactId>gwt-maven-plugin</artifactId>
+						<configuration>
+							<runTarget>mr.davidsanderson.uml.application.Application/Application.html</runTarget>
+							<modules>
+								<value>mr.davidsanderson.uml.application.Application</value>
+							</modules>
+							<servicePattern>mr/davidsanderson/uml/client/UMLGraphService.java</servicePattern>
+
+						</configuration>
+						<executions>
+							<execution>
+								<phase>install</phase>
+								<goals>
+									<goal>resources</goal>
+									<goal>compile</goal>
+									<goal>generateAsync</goal>
+									<goal>test</goal>
+									<goal>run</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+
+				</plugins>
+			</build>
+
+		</profile>
+
+	</profiles>
+
+	<pluginRepositories>
+		<pluginRepository>
+			<id>gwt-maven</id>
+			<url>http://gwt-maven.googlecode.com/svn/trunk/mavenrepo</url>
+		</pluginRepository>
+	</pluginRepositories>
+	<repositories>
+		<repository>
+			<id>gwt-maven</id>
+			<url>http://gwt-maven.googlecode.com/svn/trunk/mavenrepo</url>
+		</repository>
+		<repository>
+			<id>guice</id>
+			<url>http://guice-maven.googlecode.com/svn/trunk</url>
+		</repository>
+		<repository>
+			<id>timefire</id>
+			<url>http://timefire-repository.googlecode.com/svn/mavenrepo/</url>
+		</repository>
+	</repositories>
 </project>
