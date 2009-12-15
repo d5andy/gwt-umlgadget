@@ -19,6 +19,7 @@ import mr.davidsanderson.uml.client.GraphEvent.GraphEventType;
 
 import com.allen_sauer.gwt.log.client.Log;
 import com.google.gwt.user.client.rpc.AsyncCallback;
+import com.google.inject.Inject;
 
 /**
  * @author dsand
@@ -28,10 +29,16 @@ public class RetrieveServer implements AsyncCallback<UMLGraph> {
 	
 	private static final String origin = RetrieveServer.class.getName();
 	
-	public RetrieveServer(UMLGraphServiceAsync service) {
+	GraphEventBus graphEventBus;
+	
+	@Inject
+	public RetrieveServer(GraphEventBus graphEventBus) {
 		Log.debug("RetrieveServer : service.getUMLGraph");
+		this.graphEventBus = graphEventBus;
+	}
+	
+	public void init(UMLGraphServiceAsync service) {
 		service.getUMLStyles(this);
-		
 	}
 
 	/* (non-Javadoc)
@@ -40,7 +47,7 @@ public class RetrieveServer implements AsyncCallback<UMLGraph> {
 	@Override
 	public void onFailure(Throwable err) {
 		Log.debug("RetrieveServer.onFailure : fire event");
-		GraphEventBus.get().fireEvent(new GraphEvent(origin, GraphEventType.SERVICE_FAIL));
+		graphEventBus.fireEvent(new GraphEvent(origin, GraphEventType.SERVICE_FAIL));
 		
 	}
 
@@ -50,7 +57,7 @@ public class RetrieveServer implements AsyncCallback<UMLGraph> {
 	@Override
 	public void onSuccess(UMLGraph graph) {
 		Log.debug("RetrieveServer.onSuccess : fire event");
-		GraphEventBus.get().fireEvent(new GraphEvent(origin, graph, GraphEventType.SERVICE_SUCCESS));
+		graphEventBus.fireEvent(new GraphEvent(origin, graph, GraphEventType.SERVICE_SUCCESS));
 		
 	}
 	

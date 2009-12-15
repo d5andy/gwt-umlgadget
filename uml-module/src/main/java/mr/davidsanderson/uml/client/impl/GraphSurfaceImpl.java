@@ -1,19 +1,4 @@
-/**
- * Copyright 2009 David Sanderson <mr.davidsanderson@gmail.com>
- * 
- * Licensed under the Apache License, Version 2.0 (the "License"); you may not
- * use this file except in compliance with the License. You may obtain a copy of
- * the License at
- * 
- * http://www.apache.org/licenses/LICENSE-2.0
- * 
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
- * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
- * License for the specific language governing permissions and limitations under
- * the License.
-  */
-package mr.davidsanderson.uml.client;
+package mr.davidsanderson.uml.client.impl;
 
 import gwt.g2d.client.graphics.KnownColor;
 import gwt.g2d.client.graphics.Surface;
@@ -21,6 +6,11 @@ import gwt.g2d.client.math.Vector2;
 
 import java.util.Map;
 
+import mr.davidsanderson.uml.client.GraphEvent;
+import mr.davidsanderson.uml.client.GraphEventBus;
+import mr.davidsanderson.uml.client.GraphEventHandler;
+import mr.davidsanderson.uml.client.UMLGraph;
+import mr.davidsanderson.uml.client.UMLGraphHelper;
 import mr.davidsanderson.uml.client.GraphEvent.GraphEventType;
 import mr.davidsanderson.uml.core.render.FontMetrics;
 
@@ -28,25 +18,30 @@ import com.allen_sauer.gwt.log.client.Log;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.Window;
+import com.google.gwt.user.client.ui.PopupPanel;
+import com.google.inject.Inject;
+import com.google.inject.name.Named;
 
-/**
- * @author dsand
- *
- */
-public class GraphSurface extends Surface {
+public class GraphSurfaceImpl extends Surface {
 	
-	private static final String origin = GraphSurface.class.getName();
+	private static final String origin = GraphSurfaceImpl.class.getName();
 	
 	private String xmlContent;
 	private Map<String, String> styles;
 	
-	private GraphPopupMenu popupMenu;
+	private GraphEventBus graphEventBus;
+	private UMLGraphHelper graphHelper;
 
 	/**
 	 * GraphSurface.
 	 */
-	public GraphSurface() {
+	@Inject
+	public GraphSurfaceImpl(@Named("GraphPopupMenu") final PopupPanel popupMenu, UMLGraphHelper graphHelper,
+			GraphEventBus graphEventBus			
+			) {
 		super(400,400);
+		this.graphEventBus = graphEventBus;
+		this.graphHelper = graphHelper;
 //		setSize("100%", "100%");
 		FontMetrics.initialise(getCanvas());
 		Log.debug("GraphSurface : constructor");
@@ -58,7 +53,6 @@ public class GraphSurface extends Surface {
 
 		Log.debug("GraphSurface : new GraphPopupMenu");
 		
-		popupMenu = new GraphPopupMenu();
 		addClickHandler(new ClickHandler() {
 
 			@Override
@@ -66,12 +60,12 @@ public class GraphSurface extends Surface {
 				Log.debug("GraphSurface : onClick show popup");
 				int x = event.getNativeEvent().getClientX();
 				int y = event.getNativeEvent().getClientY();
-				GraphSurface.this.popupMenu.setPopupPosition(x, y);
-				GraphSurface.this.popupMenu.show();
+				popupMenu.setPopupPosition(x, y);
+				popupMenu.show();
 			}
 			
 		});
-		GraphEventBus.get().addHandler(eventHandler, GraphEvent.getType());
+		graphEventBus.addHandler(eventHandler, GraphEvent.getType());
 	}
 	
 	private GraphEventHandler eventHandler = new GraphEventHandler(){
@@ -79,8 +73,8 @@ public class GraphSurface extends Surface {
 		@Override
 		public void onContentChangedEvent(GraphEvent event) {
 			Log.debug("GraphSurface.eventHandler.onContentChangedEvent : set content and draw.");
-			GraphSurface.this.xmlContent = event.getUmlContent(); 
-			GraphSurface.this.draw();
+			GraphSurfaceImpl.this.xmlContent = event.getUmlContent(); 
+			GraphSurfaceImpl.this.draw();
 		}
 
 		@Override
@@ -100,8 +94,8 @@ public class GraphSurface extends Surface {
 				UMLGraph graph = event.getGraph();
 				if (graph.styles != null && !graph.styles.isEmpty()) {
 					Log.debug("GraphSurface.eventHandler.onServiceSucess : set styles and draw.");
-					GraphSurface.this.styles = graph.styles; 
-					GraphSurface.this.draw();			
+					GraphSurfaceImpl.this.styles = graph.styles; 
+					GraphSurfaceImpl.this.draw();			
 				} else {
 					Log.debug("GraphSurface.eventHandler.onServiceSucess : graph.styles empty or null.");
 				}
@@ -117,11 +111,11 @@ public class GraphSurface extends Surface {
 			Log.debug("GraphSurface.draw clear surface");
 			this.clear();
 			Log.debug("GraphSurface.draw UMLGraphHelper.drawDiagram");
-			new UMLGraphHelper().drawDiagram(xmlContent, styles, this);
+			graphHelper.drawDiagram(xmlContent, styles, this);
 			int height = this.getHeight();
 			int width = this.getWidth();
 			Log.debug("GraphSurface.draw " + width + "width "+ height + " height");
-			GraphEventBus.get().fireEvent(new GraphEvent(origin, GraphEventType.GRAPH_RESIZE, height, width));
+			graphEventBus.fireEvent(new GraphEvent(origin, GraphEventType.GRAPH_RESIZE, height, width));
 		} else if (xmlContent != null && !xmlContent.equals("")) {
 			Log.debug("GraphSurface.draw : xmlContent empty or null.");
 		} else if (styles != null && !styles.isEmpty()) {
