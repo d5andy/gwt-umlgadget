@@ -9,7 +9,9 @@
 	<inherits name='mr_davidsanderson_uml' />
 	<inherits name='org.antlr.antlr' />
 	<inherits name="com.googlecode.gwtx.Java" />
+	<inherits name="org.timepedia.exporter.Exporter"/>
 	<inherits name="com.allen_sauer.gwt.log.gwt-log-DEBUG" />
+	<inherits name="com.google.gwt.inject.Inject"/>
 	<inherits name="com.google.gwt.i18n.I18N"/>
 
 	<!-- Specify the app entry point class.                         -->

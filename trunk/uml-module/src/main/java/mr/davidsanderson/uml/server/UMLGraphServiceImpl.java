@@ -15,55 +15,38 @@
   */
 package mr.davidsanderson.uml.server;
 
-import java.io.IOException;
-import java.util.logging.Logger;
-
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
-
 import mr.davidsanderson.uml.client.UMLGraph;
 import mr.davidsanderson.uml.client.UMLGraphService;
 import mr.davidsanderson.uml.core.render.StylePropLoader;
 
 import org.modsl.core.lang.uml.UMLMetaType;
 
-import com.google.gwt.user.server.rpc.RPCServletUtils;
-import com.google.gwt.user.server.rpc.RemoteServiceServlet;
+import com.google.gwt.user.server.rpc.GadgetServiceServlet;
 
 /**
- * UMLGraphServiceImpl an implementation of the UML graph service compatible with 
- * GWT RPC.
- * 
  * @author dsand
- * 
+ *
  */
-public class UMLGraphServiceImpl extends RemoteServiceServlet implements
+public class UMLGraphServiceImpl extends GadgetServiceServlet implements
 		UMLGraphService {
 	
-	Logger logger = Logger.getLogger(UMLGraphServiceImpl.class.getName());
-
+	private static StylePropLoader stl;
+	
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 8990423684172200388L;
+	private static final long serialVersionUID = -4696653903537941786L;
 
-	/* (non-Javadoc)
-	 * @see org.modsl.gwt.client.UMLGraphService#getUMLStyles()
-	 */
 	@Override
 	public UMLGraph getUMLStyles() {
-		logger.info("UMLGraphServiceImpl.getUMLStyles : populate style props");
-		StylePropLoader stl = new StylePropLoader();
-		stl.load("cfg/uml:cfg", "uml", UMLMetaType.class);
-		logger.info("UMLGraphServiceImpl.getUMLStyles : return graph");
-		return new UMLGraph(stl.getProps());
+		return new UMLGraph(getStl().getProps());
 	}
-
 	
-	@Override
-	protected String readContent(HttpServletRequest request)
-			throws ServletException, IOException {
-		return RPCServletUtils.readContentAsUtf8(request, false);
+	private static StylePropLoader getStl() {
+		if (stl == null) {
+			stl = new StylePropLoader();
+			stl.load("cfg/uml:cfg", "uml", UMLMetaType.class);
+		}
+		return stl;
 	}
-
 }

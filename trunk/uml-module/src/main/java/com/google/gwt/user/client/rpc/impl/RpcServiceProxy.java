@@ -103,7 +103,7 @@ public class RpcServiceProxy extends RemoteServiceProxy {
 
 		//params[gadgets.io.RequestParameters.AUTHORIZATION]=gadgets.io.AuthorizationType.SIGNED;
 		params[gadgets.io.RequestParameters.METHOD]=gadgets.io.MethodType.GET;
-
+        alert(serviceEntryPoint);
 		gadgets.io.makeRequest(serviceEntryPoint+"?"+@com.google.gwt.user.client.rpc.impl.RpcServiceProxy::RPC_PAYLOAD_PARAM+"="+encodeURIComponent(requestData), function(resp) { 
 		    if(resp.errors && resp.errors.length > 0) {
 		    	alert(resp.errors);
