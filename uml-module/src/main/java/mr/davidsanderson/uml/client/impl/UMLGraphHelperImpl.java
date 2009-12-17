@@ -1,3 +1,18 @@
+/**
+ * Copyright 2009 David Sanderson <mr.davidsanderson@gmail.com>
+ * 
+ * Licensed under the Apache License, Version 2.0 (the "License"); you may not
+ * use this file except in compliance with the License. You may obtain a copy of
+ * the License at
+ * 
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+ * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
+ * License for the specific language governing permissions and limitations under
+ * the License.
+ */
 package mr.davidsanderson.uml.client.impl;
 
 import gwt.g2d.client.graphics.Surface;
@@ -41,15 +56,29 @@ import org.modsl.core.lang.uml.layout.seq.SeqLayoutVisitor;
 import com.allen_sauer.gwt.log.client.Log;
 import com.google.inject.Inject;
 
+/**
+ * @author dsand
+ * 
+ */
 public class UMLGraphHelperImpl implements UMLGraphHelper {
 	private static final String origin = UMLGraphHelper.class.getName();
 	GraphEventBus graphEventBus;
-	
+
+	/**
+	 * @param graphEventBus
+	 */
 	@Inject
 	public UMLGraphHelperImpl(GraphEventBus graphEventBus) {
 		this.graphEventBus = graphEventBus;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * mr.davidsanderson.uml.client.UMLGraphHelper#drawDiagram(java.lang.String,
+	 * java.util.Map, gwt.g2d.client.graphics.Surface)
+	 */
 	public void drawDiagram(String xmlContent, Map<String, String> styles,
 			Surface surface) {
 		Log.debug("UMLGraphHelper.drawDiagram load styles");
@@ -65,7 +94,8 @@ public class UMLGraphHelperImpl implements UMLGraphHelper {
 			parser.diagram();
 		} catch (RecognitionException e) {
 			Log.error("UMLGraphHelper.drawDiagram parser.diagram failed", e);
-			graphEventBus.fireEvent(new GraphEvent(origin, "PARSE ERROR: " +e.getMessage(), GraphEventType.MSG_ADD));
+			graphEventBus.fireEvent(new GraphEvent(origin, "PARSE ERROR: "
+					+ e.getMessage(), GraphEventType.MSG_ADD));
 		}
 
 		Log.debug("UMLGraphHelper.drawDiagram layout");
@@ -218,7 +248,7 @@ public class UMLGraphHelperImpl implements UMLGraphHelper {
 
 		}
 		Log.debug("UMLGraphHelper.render Finished");
-		
+
 	}
 
 }

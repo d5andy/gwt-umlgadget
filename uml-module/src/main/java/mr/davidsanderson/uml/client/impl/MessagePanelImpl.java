@@ -51,6 +51,9 @@ public class MessagePanelImpl extends DockPanel implements GraphEventHandler {
 	
 	private GraphEventBus graphEventBus;
 
+	/**
+	 * @param graphEventBus
+	 */
 	@Inject
 	public MessagePanelImpl(final GraphEventBus graphEventBus) {	
 		this.graphEventBus = graphEventBus;
@@ -116,6 +119,9 @@ public class MessagePanelImpl extends DockPanel implements GraphEventHandler {
 		graphEventBus.fireEvent(new GraphEvent(origin, GraphEventType.MSG_CLEAR));
 	}
 
+	/* (non-Javadoc)
+	 * @see mr.davidsanderson.uml.client.GraphEventHandler#onContentChangedEvent(mr.davidsanderson.uml.client.GraphEvent)
+	 */
 	@Override
 	public void onContentChangedEvent(GraphEvent event) {
 		// TODO Auto-generated method stub
@@ -129,10 +135,16 @@ public class MessagePanelImpl extends DockPanel implements GraphEventHandler {
 		
 	}
 
+	/* (non-Javadoc)
+	 * @see mr.davidsanderson.uml.client.GraphEventHandler#onEdit(mr.davidsanderson.uml.client.GraphEvent)
+	 */
 	@Override
 	public void onEdit(GraphEvent event) {
 	}
 
+	/* (non-Javadoc)
+	 * @see mr.davidsanderson.uml.client.GraphEventHandler#onService(mr.davidsanderson.uml.client.GraphEvent)
+	 */
 	@Override
 	public void onService(GraphEvent event) {
 		if (event.getEventType().equals(GraphEventType.SERVICE_FAIL)) {
