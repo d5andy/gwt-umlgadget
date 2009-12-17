@@ -18,6 +18,8 @@ package mr.davidsanderson.uml.application.client;
 
 import mr.davidsanderson.uml.client.GraphEvent;
 import mr.davidsanderson.uml.client.UMLGraphInjector;
+import mr.davidsanderson.uml.client.UMLGraphService;
+import mr.davidsanderson.uml.client.UMLGraphServiceAsync;
 import mr.davidsanderson.uml.client.GraphEvent.GraphEventType;
 
 import com.allen_sauer.gwt.log.client.Log;
@@ -50,7 +52,7 @@ public class Application implements EntryPoint {
 		
 		RootPanel.get().add(injector.getGraphEventMainPanel());
 		
-		injector.getRetriever().init(injector.getGraphService());
+		injector.getRetriever().init((UMLGraphServiceAsync)GWT.create(UMLGraphService.class));
 		
 		Log.debug("get modsl.uml");
 		RootPanel params = RootPanel.get("modsl.uml");

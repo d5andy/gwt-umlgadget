@@ -13,9 +13,5 @@ public interface UMLGraphInjector extends Ginjector {
 	RetrieveServer getRetriever();
 	
 	GraphEventBus getEventBus();
-	
-	UMLGraphServiceAsync getGraphService();
-	
-	
 
 }

@@ -4,7 +4,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>mr.davidsanderson.uml</groupId>
 
-	<artifactId>gwt-modsl</artifactId>
+	<artifactId>uml-root</artifactId>
 	<packaging>pom</packaging>
 	<name>root</name>
 	<version>1.0-SNAPSHOT</version>
