@@ -197,10 +197,14 @@
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>gwt-maven-plugin</artifactId>
+				<version>1.2-SNAPSHOT</version>
 				<configuration>
-					<runTarget>mr.davidsanderson.uml.application.Application/Application.html</runTarget>
+					<gwtHome>${gwtHome}</gwtHome>
+					<disableCastChecking>true</disableCastChecking>
+					<disableClassMetadata>true</disableClassMetadata>				
 					<modules>
 						<value>mr.davidsanderson.uml.application.Application</value>
+						<value>mr.davidsanderson.uml.application.Application_Xs</value>
 					</modules>
 					<servicePattern>mr/davidsanderson/uml/client/UMLGraphService.java</servicePattern>
 				</configuration>
@@ -249,6 +253,10 @@
 		</pluginRepository>
 	</pluginRepositories>
 	<repositories>
+		<repository>
+			<id>nomal</id>
+			<url>http://ukfawbld5:8081/repo/</url>
+		</repository>
 		<repository>
 			<id>gwt-maven</id>
 			<url>http://gwt-maven.googlecode.com/svn/trunk/mavenrepo/</url>
