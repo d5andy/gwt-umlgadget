@@ -68,6 +68,9 @@ public class GraphEvent extends GwtEvent<GraphEventHandler> {
 	
 	
 	
+	/* (non-Javadoc)
+	 * @see com.google.gwt.event.shared.GwtEvent#dispatch(com.google.gwt.event.shared.EventHandler)
+	 */
 	@Override
 	protected void dispatch(GraphEventHandler handler) {
 		// TODO Auto-generated method stub

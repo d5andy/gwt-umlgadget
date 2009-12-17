@@ -18,6 +18,7 @@ package mr.davidsanderson.uml.client.impl;
 import mr.davidsanderson.uml.client.GraphEvent;
 import mr.davidsanderson.uml.client.GraphEventBus;
 import mr.davidsanderson.uml.client.GraphEventHandler;
+import mr.davidsanderson.uml.client.GraphModel;
 import mr.davidsanderson.uml.client.GraphEvent.GraphEventType;
 
 import com.allen_sauer.gwt.log.client.Log;
@@ -31,20 +32,24 @@ import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.TextArea;
 import com.google.inject.Inject;
 
+/**
+ * @author dsand
+ *
+ */
 public class EditorPanelImpl extends DockPanel {
 
 	private TextArea textArea;
 	private static final String origin = EditorPanelImpl.class.getName();
 	private boolean editing = false;
-	private GraphEventBus graphEventBus;
+	private GraphModel model;
 
 	/**
 	 * 
 	 */
 	@Inject
-	public EditorPanelImpl(final GraphEventBus graphEventBus) {
+	public EditorPanelImpl(final GraphEventBus graphEventBus, GraphModel model) {
 		Log.debug("UMLEditorPanel : start");
-		this.graphEventBus = graphEventBus;
+		this.model = model;
 		graphEventBus.addHandler(eventHandler, GraphEvent.getType());
 		// set editor
 		this.setSpacing(5);
@@ -108,6 +113,7 @@ public class EditorPanelImpl extends DockPanel {
 		public void onEdit(GraphEvent event) {
 			if (event.getEventType().equals(GraphEventType.EDITOR_OPEN)) {
 				EditorPanelImpl.this.editing = true;
+				textArea.setText(model.getModel());
 			}
 		}
 

@@ -1,0 +1,46 @@
+<!DOCTYPE module PUBLIC "//gwt-module/" "http://google-web-toolkit.googlecode.com/svn/tags/1.6.2/distro-source/core/src/gwt-module.dtd">
+<module rename-to='umlapplicationxs'>
+	<!-- Inherit the core Web Toolkit stuff.                        -->
+	<inherits name='com.google.gwt.user.User' />
+
+	<!--  inherit css based theme -->
+	<inherits name='com.google.gwt.user.theme.standard.Standard' />
+	<inherits name='gwt.g2d.g2d' />
+	<inherits name='mr_davidsanderson_uml' />
+	<inherits name='org.antlr.antlr' />
+	<inherits name="com.googlecode.gwtx.Java" />
+	<inherits name="org.timepedia.exporter.Exporter"/>
+	<inherits name="com.google.gwt.inject.Inject"/>
+	<inherits name="com.allen_sauer.gwt.log.gwt-log-DEBUG" />
+	
+	<!-- 
+	<generate-with
+		class="com.google.gwt.user.rebind.rpc.UberServiceInterfaceProxyGenerator">
+		<when-type-assignable class="com.google.gwt.user.client.rpc.RemoteService" />
+
+	</generate-with>
+	<define-property name="gwt.rpc.proxySuperclass"
+		values="com_google_gwt_user_client_rpc_impl_RpcServiceProxy" />
+	<set-property name="gwt.rpc.proxySuperclass"
+		value="com_google_gwt_user_client_rpc_impl_RpcServiceProxy" />
+		 -->
+	<!-- Specify the app entry point class.                         -->
+	<entry-point class='mr.davidsanderson.uml.application.client.Application' />
+
+	<!-- Specify the application specific style sheet.              -->
+	<stylesheet src='Application.css' />
+	<set-property name="log_ConsoleLogger" value="ENABLED" />
+	<set-property name="log_DivLogger" value="DISABLED" />
+	<set-property name="log_FirebugLogger" value="DISABLED" />
+	<set-property name="log_GWTLogger" value="DISABLED" />
+	<set-property name="log_SystemLogger" value="DISABLED" />
+	<set-property name="export" value="yes"/>
+	<set-configuration-property name="log_pattern"
+		value="%d [%-5p] %m%n" />
+	<source path="client">
+		<include name="**/*" />
+	</source>
+	<add-linker name="xs"/>
+
+
+</module>

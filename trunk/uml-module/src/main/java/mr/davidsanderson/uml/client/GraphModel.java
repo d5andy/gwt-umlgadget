@@ -15,22 +15,25 @@
  */
 package mr.davidsanderson.uml.client;
 
-import gwt.g2d.client.graphics.Surface;
-
-import java.util.Map;
+import java.util.HashMap;
 
 /**
  * @author dsand
  *
  */
-public interface UMLGraphHelper {
+public interface GraphModel {
+	
 	/**
-	 * draw the diagram onto the 2D surface.
-	 * 
-	 * @param xmlContent : String ModSL.
-	 * @param styles : properties.
-	 * @param surface : Surface.
+	 * get the model (ModSL).
+	 * @return String.
 	 */
-	public void drawDiagram(String xmlContent, Map<String, String> styles,
-			Surface surface); 
+	public abstract String getModel();
+	
+	/**
+	 * get the styles.
+	 * @return
+	 */
+	public abstract HashMap<String, String> getStyles();
+
+
 }

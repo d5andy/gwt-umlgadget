@@ -18,6 +18,7 @@ package mr.davidsanderson.uml.client;
 import mr.davidsanderson.uml.client.impl.EditorPanelImpl;
 import mr.davidsanderson.uml.client.impl.GraphEventBusImpl;
 import mr.davidsanderson.uml.client.impl.GraphMainPanelImpl;
+import mr.davidsanderson.uml.client.impl.GraphModelImpl;
 import mr.davidsanderson.uml.client.impl.GraphPopupMenuImpl;
 import mr.davidsanderson.uml.client.impl.GraphSurfaceImpl;
 import mr.davidsanderson.uml.client.impl.MessagePanelImpl;
@@ -40,6 +41,7 @@ public class UMLGraphClientModule extends AbstractGinModule {
 		// TODO Auto-generated method stub
 		bind(GraphEventBus.class).to(GraphEventBusImpl.class).in(Singleton.class);
 		bind(UMLGraphHelper.class).to(UMLGraphHelperImpl.class).in(Singleton.class);
+		bind(GraphModel.class).to(GraphModelImpl.class).in(Singleton.class);
 		bind(GraphMainPanelImpl.class).in(Singleton.class);
 		
 		bind(Widget.class).annotatedWith(Names.named("GraphSurface")).to(GraphSurfaceImpl.class);
