@@ -14,48 +14,13 @@
 	<properties>
 
 		<!-- convenience to define GWT version in one place -->
-		<gwt.version>1.7.1</gwt.version>
+		<gwt.version>2.0.0</gwt.version>
 		<!--  tell the compiler we can use 1.5 -->
 		<maven.compiler.source>1.6</maven.compiler.source>
 		<maven.compiler.target>1.6</maven.compiler.target>
 
 	</properties>
 
-	<profiles>
-		<profile>
-			<id>gwt-linux-profile</id>
-			<activation>
-				<os>
-					<family>unix</family>
-				</os>
-			</activation>
-			<properties>
-				<platform>linux</platform>
-			</properties>
-		</profile>
-		<profile>
-			<id>gwt-mac-profile</id>
-			<activation>
-				<os>
-					<family>mac</family>
-				</os>
-			</activation>
-			<properties>
-				<platform>mac</platform>
-			</properties>
-		</profile>
-		<profile>
-			<id>gwt-windows-profile</id>
-			<activation>
-				<os>
-					<family>windows</family>
-				</os>
-			</activation>
-			<properties>
-				<platform>windows</platform>
-			</properties>
-		</profile>
-	</profiles>
 
 	<dependencies>
 
@@ -70,19 +35,18 @@
 			<groupId>com.google.gwt</groupId>
 			<artifactId>gwt-user</artifactId>
 			<version>${gwt.version}</version>
-			<scope>provided</scope>
 		</dependency>
-		<dependency>
-			<groupId>com.google.gwt</groupId>
-			<artifactId>gwt-dev</artifactId>
-			<version>1.6.4</version>
-			<classifier>${platform}</classifier>
-			<scope>compile</scope>
-		</dependency>
+
 		<dependency>
 			<groupId>com.google.gwt.google-apis</groupId>
 			<artifactId>gwt-gadgets</artifactId>
 			<version>1.0.3</version>
+			<exclusions>
+				<exclusion>
+					<groupId>com.google.gwt</groupId>
+					<artifactId>gwt-user</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 		<dependency>
 			<groupId>org.cobogw.gwt.wave-api</groupId>
@@ -111,11 +75,6 @@
 			<artifactId>gwt-antlr</artifactId>
 			<version>1.0-SNAPSHOT</version>
 		</dependency>
-<!--		<dependency>-->
-<!--			<groupId>org.antlr</groupId>-->
-<!--			<artifactId>antlr-runtime</artifactId>-->
-<!--			<version>3.0</version>-->
-<!--		</dependency>-->
 		<dependency>
 			<groupId>com.google.gwt</groupId>
 			<artifactId>gwt-g2d</artifactId>
@@ -134,24 +93,52 @@
 			<groupId>com.google.code.gwtx</groupId>
 			<artifactId>gwtx</artifactId>
 			<version>1.5.2</version>
+			<exclusions>
+				<exclusion>
+					<groupId>com.google.gwt</groupId>
+					<artifactId>gwt-user</artifactId>
+				</exclusion>
+			</exclusions>
+			
 		</dependency>
-		<!--
 		<dependency>
-			<groupId>log4j</groupId>
-			<artifactId>log4j</artifactId>
-			<version>1.2.14</version>
+			<groupId>aopalliance</groupId>
+			<artifactId>aopalliance</artifactId>
+			<version>1.0</version>
 		</dependency>
-		-->
+		<dependency>
+			<groupId>com.google.code.guice</groupId>
+			<artifactId>guice</artifactId>
+			<version>2.0.1</version>
+		</dependency>
+		<dependency>
+			<groupId>com.google.gwt</groupId>
+			<artifactId>google-gin</artifactId>
+			<version>1.0-SNAPSHOT</version>
+		</dependency>
 	</dependencies>
 
 	<build>
 		<outputDirectory>war/WEB-INF/classes</outputDirectory>
 		<plugins>
 			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>2.0.2</version>
+				<configuration>
+					<source>${maven.compiler.source}</source>
+					<target>${maven.compiler.target}</target>
+				</configuration>
+			</plugin>
+
+			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>gwt-maven-plugin</artifactId>
-				<version>1.1-SNAPSHOT</version>
+				<version>1.2-SNAPSHOT</version>
 				<configuration>
+					<gwtHome>${gwtHome}</gwtHome>
+					<disableCastChecking>true</disableCastChecking>
+					<disableClassMetadata>true</disableClassMetadata>
 					<runTarget>index.html</runTarget>
 					<modules>
 						<value>mr.davidsanderson.uml.wave.umlgraphgadget</value>
@@ -162,9 +149,8 @@
 				<executions>
 					<execution>
 						<goals>
+							<goal>resources</goal>
 							<goal>compile</goal>
-							<goal>generateAsync</goal>
-							<goal>test</goal>
 						</goals>
 					</execution>
 				</executions>
@@ -172,27 +158,18 @@
 			<!--
 				If you want to use the target/web.xml file mergewebxml produces,
 				tell the war plugin to use it. Also, exclude what you want from the
-				final artifact here. 
+				final artifact here.
 			-->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-war-plugin</artifactId> 
+				<artifactId>maven-war-plugin</artifactId>
 				<configuration>
 					<webXml>src/main/webapp/WEB-INF/web.xml</webXml>
-					<warSourceExcludes>.gwt-tmp/**</warSourceExcludes> 
+					<warSourceExcludes>.gwt-tmp/**</warSourceExcludes>
 					<webappDirectory>${basedir}/war</webappDirectory>
 				</configuration>
 			</plugin>
 
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<version>2.0.2</version>
-				<configuration>
-					<source>${maven.compiler.source}</source>
-					<target>${maven.compiler.target}</target>
-				</configuration>
-			</plugin>
 		</plugins>
 	</build>
 	<repositories>

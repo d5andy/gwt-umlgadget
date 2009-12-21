@@ -23,20 +23,6 @@ import com.google.gwt.core.client.EntryPoint;
  */
 public class Application implements EntryPoint {
 	
-	private static final String origin = Application.class.getName();
-
-	static String demo = "class diagram self {\n"
-			+ "\t abstract class AbstractElement {\n "
-			+ "\t\tname;\n\t\tparent;\n\t\ttype;\n\t\tabstract accept(AbstractVisitor);\n\t}\n"
-			+ "\tabstract class AbstractBox extends AbstractElement {\n"
-			+ "\t\tpos; \n\t\tdisp; \n\t\tsize;\n\t}\n	"
-			+ "\tclass Edge extends AbstractElement {\n"
-			+ "\t\tlabels;\n\t\tbends;\n\t\tnode1; \n\t\tnode2;\n\t}\n	"
-			+ "\n\tclass Bend extends AbstractBox {	}\n"
-			+ "\tclass Graph extends AbstractBox {\n\t\treqSize; \n\t\tlabels; "
-			+ "\n\t\t1->*(Edge); \n\t\t1->*(Node);\n\t}\n	"
-			+ "\tclass Node extends AbstractBox {\n\t\tconnectedEdges; \n\t\tlabels;	\n\t}\n}\n";
-
 	public void onModuleLoad() {
 		new UMLGraphApplication().initalise();
 	}

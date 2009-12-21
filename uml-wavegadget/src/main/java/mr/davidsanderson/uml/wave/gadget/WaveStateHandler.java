@@ -27,6 +27,7 @@ import org.cobogw.gwt.waveapi.gadget.client.StateUpdateEventHandler;
 import org.cobogw.gwt.waveapi.gadget.client.WaveFeature;
 
 import com.allen_sauer.gwt.log.client.Log;
+import com.google.inject.Inject;
 
 /**
  * @author dsand
@@ -35,6 +36,7 @@ import com.allen_sauer.gwt.log.client.Log;
 public class WaveStateHandler implements StateUpdateEventHandler {
 	private static final String origin = WaveStateHandler.class.getName();
 	private static final String umlKey = "uml";
+	private static final String stylesKey = "styles";
 	private static final String demo = "class diagram self {\n" +
 	"\t abstract class AbstractElement {\n " +
 	"\t\tname;\n\t\tparent;\n\t\ttype;\n\t\tabstract accept(AbstractVisitor);\n\t}\n" +
@@ -48,15 +50,20 @@ public class WaveStateHandler implements StateUpdateEventHandler {
 	"\tclass Node extends AbstractBox {\n\t\tconnectedEdges; \n\t\tlabels;	\n\t}\n}\n";	
 	
 	private WaveFeature waveFeature;
-	
+	private GraphEventBus graphEventBus;
 	/**
 	 * @param waveFeature : WaveFeature
 	 */
-	public WaveStateHandler(WaveFeature waveFeature) {
+	@Inject
+	public WaveStateHandler(GraphEventBus graphEventBus) {
 		Log.debug("WaveStateHandler : constructor.");
+		this.graphEventBus = graphEventBus;
+		graphEventBus.addHandler(eventHandler, GraphEvent.getType());
+	}
+	
+	public void init(WaveFeature waveFeature) {
 		this.waveFeature = waveFeature;
 		waveFeature.addStateUpdateEventHandler(this);
-		GraphEventBus.get().addHandler(eventHandler, GraphEvent.getType());
 		Log.debug("WaveStateHandler : waveFeature.getState");
 		String uml = waveFeature.getState().get(umlKey);
 		if (uml != null && !uml.equals("")) {
@@ -68,6 +75,9 @@ public class WaveStateHandler implements StateUpdateEventHandler {
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see org.cobogw.gwt.waveapi.gadget.client.StateUpdateEventHandler#onUpdate(org.cobogw.gwt.waveapi.gadget.client.StateUpdateEvent)
+	 */
 	@Override
 	public void onUpdate(StateUpdateEvent event) {
 		Log.debug("WaveStateHandler.onUpdate : received state event");
@@ -77,7 +87,7 @@ public class WaveStateHandler implements StateUpdateEventHandler {
 	}
 	
 	private void fireContentChanged(String uml) {
-		GraphEventBus.get().fireEvent(new GraphEvent(origin, uml, GraphEventType.CONTENT_CHANGED));
+		graphEventBus.fireEvent(new GraphEvent(origin, uml, GraphEventType.CONTENT_CHANGED));
 	}
 	
 	private GraphEventHandler eventHandler = new GraphEventHandler(){
@@ -86,29 +96,37 @@ public class WaveStateHandler implements StateUpdateEventHandler {
 		public void onContentChangedEvent(GraphEvent event) {
 			Log.debug("WaveStateHandler.eventHandler.onContentChangedEvent : hit");
 			if (!event.getOrigin().equals(WaveStateHandler.origin)) {
-				Log.debug("WaveStateHandler.eventHandler.onContentChangedEvent : wasn't me");
-				String content = waveFeature.getState().get(umlKey);
-				if (content != null) {
-					Log.debug("WaveStateHandler.eventHandler.onContentChangedEvent : submit delta");
-					HashMap<String, String> map = new HashMap<String, String>();
-					map.put(umlKey, event.getUmlContent());					
-					waveFeature.getState().submitDelta(map);
+				if (waveFeature != null) {
+					
+					Log.debug("WaveStateHandler.eventHandler.onContentChangedEvent : wasn't me");
+					String content = waveFeature.getState().get(umlKey);
+					if (content != null) {
+						Log.debug("WaveStateHandler.eventHandler.onContentChangedEvent : submit delta");
+						HashMap<String, String> map = new HashMap<String, String>();
+						map.put(umlKey, event.getUmlContent());					
+						waveFeature.getState().submitDelta(map);
+					} else {
+						Log.debug("WaveStateHandler.eventHandler.onContentChangedEvent : submit value");
+						waveFeature.getState().submitValue(umlKey, event.getUmlContent());
+					}
 				} else {
-					Log.debug("WaveStateHandler.eventHandler.onContentChangedEvent : submit value");
-					waveFeature.getState().submitValue(umlKey, event.getUmlContent());
+					Log.debug("WaveStateHandler.eventHandler.onContentChangedEvent : wave feature not enabled");
 				}
 			}
 		}
 
 		@Override
 		public void onEdit(GraphEvent event) {
-			// TODO Auto-generated method stub
-			
+			// Not interested...
 		}
 
 		@Override
 		public void onService(GraphEvent event) {
-			// TODO Auto-generated method stub
+			if (event.getEventType().equals(GraphEventType.SERVICE_SUCCESS)) {
+				HashMap<String, String> styles = event.getGraph().getStyles();
+				// do something here...
+			}
+			
 			
 		}
 		

@@ -44,5 +44,19 @@ public class StylePropLoader extends StyleLoader {
 	public HashMap<String, String> getProps() {
 		return propLoader.getProps();		
 	}
+	
+//	public static void main(String[] args) {
+//		StylePropLoader stl = new StylePropLoader();
+//		stl.load("cfg/uml:cfg", "uml", UMLMetaType.class);
+//		try {
+//			stl.propLoader.p.storeToXML(new FileOutputStream(File.createTempFile("styles", "uml")), "");
+//		} catch (FileNotFoundException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		} catch (IOException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//	}
 
 }

@@ -13,7 +13,7 @@
 
 		<!-- convenience to define GWT version in one place -->
 		<gwt.version>2.0.0</gwt.version>
-		<gwtHome>c:\\java\\gwt-2.0.0</gwtHome>
+		
 		<!--  tell the compiler we can use 1.5 -->
 		<maven.compiler.source>1.6</maven.compiler.source>
 		<maven.compiler.target>1.6</maven.compiler.target>
@@ -39,8 +39,6 @@
 			<groupId>com.google.gwt</groupId>
 			<artifactId>gwt-user</artifactId>
 			<version>${gwt.version}</version>
-			<scope>system</scope>
-			<systemPath>${gwtHome}/gwt-user.jar</systemPath>
 		</dependency>
 		<dependency>
 			<groupId>junit</groupId>
@@ -132,7 +130,7 @@
 						<artifactId>gwt-maven-plugin</artifactId>
 						<version>1.2-SNAPSHOT</version>
 						<configuration>
-							<gwtHome>${gwtHome}</gwtHome>
+							
 							<disableCastChecking>true</disableCastChecking>
 							<disableClassMetadata>true</disableClassMetadata>
 						</configuration>

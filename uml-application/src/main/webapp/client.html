@@ -1,0 +1,71 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Insert title here</title>
+<script type="text/javascript" language="javascript"
+	src="http://localhost:8888/umlapplicationxs/umlapplicationxs.nocache.js">
+</script>
+</head>
+<body>
+<script type="text/javascript" language="javascript">
+	window.onload=function(){
+		var app = new gwt.UMLGraphApplication();
+		app.initalise();
+	}
+</script>
+<div id="modsl.uml" style="display: none">class diagram self {
+abstract class AbstractElement { name; parent; type; abstract
+accept(AbstractVisitor); } abstract class AbstractBox extends
+AbstractElement { pos; disp; size; } class Edge extends AbstractElement
+{ labels; bends; node1; node2; } class Bend extends AbstractBox { }
+class Graph extends AbstractBox { reqSize; labels; 1->*(Edge);
+1->*(Node); } class Node extends AbstractBox { connectedEdges; labels; }
+}</div>
+
+<div id="styles.uml" style="display: none"><properties>
+<comment /> <entry key="SEQ_GRAPH.fontStyle">normal </entry> <entry
+	key="SEQ_EDGE.strokeColor">105, 105, 105 </entry> <entry
+	key="CLASS_ABSTRACT_CLASS_NODE.fontStyle">ITALIC BOLD</entry> <entry
+	key="CLASS_EXTENDS_EDGE.strokeColor">105, 105, 105 </entry> <entry
+	key="COLLAB_GRAPH.fontSize">9</entry> <entry key="SEQ_NODE.fontStyle">UNDERLINE,
+BOLD </entry> <entry key="SEQ_GRAPH.fillColor">255, 255, 255</entry> <entry
+	key="COLLAB_NODE.fontColor">0, 0, 0 </entry> <entry
+	key="COLLAB_GRAPH.fontName">Arial</entry> <entry
+	key="SEQ_NODE.strokeColor">50, 50, 112 </entry> <entry
+	key="SEQ_NODE.fillColor">0, 0, 255, 255, 255, 200, 100, 100,
+176, 196, 222, 200</entry> <entry key="CLASS_GRAPH.fontSize">9</entry> <entry
+	key="CLASS_AGGREGATION_EDGE.fontStyle">normal </entry> <entry
+	key="CLASS_VAR_NODE_LABEL.fontSize">12</entry> <entry
+	key="CLASS_CLASS_NODE.fontSize">13</entry> <entry
+	key="CLASS_AGGREGATION_EDGE.fillColor">255, 255, 255, 200</entry> <entry
+	key="CLASS_GRAPH.fontName">Arial</entry> <entry
+	key="CLASS_CLASS_NODE.fontColor">0, 0, 0 </entry> <entry
+	key="COLLAB_EDGE.strokeColor">105, 105, 105 </entry> <entry
+	key="CLASS_CLASS_NODE.strokeColor">50, 50, 112 </entry> <entry
+	key="COLLAB_NODE.fontStyle">UNDERLINE, BOLD </entry> <entry
+	key="COLLAB_GRAPH.fontColor">105, 105, 105 </entry> <entry
+	key="SEQ_EDGE.fontStyle">normal </entry> <entry
+	key="CLASS_GRAPH.fontColor">105, 105, 105 </entry> <entry
+	key="CLASS_INTERFACE_NODE.fontStyle">ITALIC </entry> <entry
+	key="COLLAB_NODE.fillColor">0, 0, 255, 255, 255, 200, 100, 100,
+176, 196, 222, 200</entry> <entry key="SEQ_EDGE.fillColor">255, 255,
+255, 200</entry> <entry key="COLLAB_NODE.strokeColor">50, 50, 112 </entry> <entry
+	key="CLASS_ABSTRACT_METHOD_NODE_LABEL.fontStyle">ITALIC</entry> <entry
+	key="CLASS_VAR_NODE_LABEL.fontStyle">normal</entry> <entry
+	key="COLLAB_NODE.fontSize">12</entry> <entry
+	key="CLASS_STATIC_VAR_NODE_LABEL.fontStyle">underline</entry> <entry
+	key="CLASS_CLASS_NODE.fontStyle">bold </entry> <entry
+	key="SEQ_NODE.fontSize">12</entry> <entry key="SEQ_GRAPH.fontColor">105,
+105, 105 </entry> <entry key="COLLAB_GRAPH.fontStyle">normal </entry> <entry
+	key="SEQ_GRAPH.fontSize">9</entry> <entry key="CLASS_GRAPH.fontStyle">normal
+</entry> <entry key="CLASS_CLASS_NODE.fillColor">0, 0, 255, 255, 255,
+200, 100, 100, 176, 196, 222, 200 </entry> <entry key="COLLAB_EDGE.fontStyle">normal
+</entry> <entry key="SEQ_NODE.fontColor">0, 0, 0 </entry> <entry
+	key="CLASS_GRAPH.fillColor">255, 255, 255</entry> <entry
+	key="COLLAB_GRAPH.fillColor">255, 255, 255</entry> <entry
+	key="SEQ_GRAPH.fontName">Arial</entry> <entry
+	key="COLLAB_EDGE.fillColor">255, 255, 255, 200</entry> <entry
+	key="CLASS_AGGREGATION_EDGE.fontSize">12</entry> </properties></div>
+</body>
+</html>
