@@ -20,7 +20,6 @@ import gwt.g2d.client.graphics.Surface;
 import gwt.g2d.client.math.Vector2;
 
 import java.util.HashMap;
-import java.util.Map;
 
 import mr.davidsanderson.uml.client.GraphEvent;
 import mr.davidsanderson.uml.client.GraphEventBus;
@@ -45,12 +44,7 @@ import com.google.inject.name.Named;
  */
 public class GraphSurfaceImpl extends Surface {
 	
-	private static final String origin = GraphSurfaceImpl.class.getName();
-	
-	//private String xmlContent;
 	private GraphModel model;
-	
-	private GraphEventBus graphEventBus;
 	private UMLGraphHelper graphHelper;
 
 	/**
@@ -60,7 +54,6 @@ public class GraphSurfaceImpl extends Surface {
 	public GraphSurfaceImpl(@Named("GraphPopupMenu") final PopupPanel popupMenu, UMLGraphHelper graphHelper,
 			GraphEventBus graphEventBus, GraphModel model) {
 		super(400,400);
-		this.graphEventBus = graphEventBus;
 		this.graphHelper = graphHelper;
 		this.model = model;
 //		setSize("100%", "100%");
@@ -104,9 +97,7 @@ public class GraphSurfaceImpl extends Surface {
 			// TODO Auto-generated method stub
 			if (event.getEventType().equals(GraphEventType.SAVE)) {
 				Window.alert("To be implemented");
-//				Window.open(getCanvas()., arg1, arg2)
 			}
-			
 		}
 
 		@Override
@@ -121,9 +112,7 @@ public class GraphSurfaceImpl extends Surface {
 					Log.debug("GraphSurface.eventHandler.onServiceSucess : graph.styles empty or null.");
 				}
 			}
-			
 		}
-		
 	};	
 	
 	public void draw() {
@@ -137,17 +126,13 @@ public class GraphSurfaceImpl extends Surface {
 		draw(modsl, model.getStyles());
 	}
 	
-	public void draw(String xmlContent, HashMap<String, String> styles) {
+	public void draw(final String xmlContent, final HashMap<String, String> styles) {
 		Log.debug("GraphSurface.draw");
 		if (xmlContent != null && !xmlContent.equals("") && styles != null) {
 			Log.debug("GraphSurface.draw clear surface");
 			this.clear();
 			Log.debug("GraphSurface.draw UMLGraphHelper.drawDiagram");
-			graphHelper.drawDiagram(xmlContent, styles, this);
-			int height = this.getHeight();
-			int width = this.getWidth();
-			Log.debug("GraphSurface.draw " + width + "width "+ height + " height");
-			graphEventBus.fireEvent(new GraphEvent(origin, GraphEventType.GRAPH_RESIZE, height, width));
+			graphHelper.drawDiagram(xmlContent, styles, GraphSurfaceImpl.this);
 		} else if (xmlContent != null && !xmlContent.equals("")) {
 			Log.debug("GraphSurface.draw : xmlContent empty or null.");
 		} else if (styles != null && !styles.isEmpty()) {

@@ -79,6 +79,7 @@ public class UMLGraphHelperImpl implements UMLGraphHelper {
 	 * mr.davidsanderson.uml.client.UMLGraphHelper#drawDiagram(java.lang.String,
 	 * java.util.Map, gwt.g2d.client.graphics.Surface)
 	 */
+	@Override	
 	public void drawDiagram(String xmlContent, Map<String, String> styles,
 			Surface surface) {
 		Log.debug("UMLGraphHelper.drawDiagram load styles");
@@ -108,6 +109,10 @@ public class UMLGraphHelperImpl implements UMLGraphHelper {
 		Log.debug("UMLGraphHelper.drawDiagram render");
 		render(parser.graph, surface, w, h);
 
+		int height = surface.getHeight();
+		int width = surface.getWidth();
+		Log.debug("GraphSurface.draw " + width + "width "+ height + " height");
+		graphEventBus.fireEvent(new GraphEvent(origin, GraphEventType.GRAPH_RESIZE, height, width));
 	}
 
 	protected Graph layout(Graph graph) {

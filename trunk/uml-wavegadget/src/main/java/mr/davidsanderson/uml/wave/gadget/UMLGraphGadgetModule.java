@@ -1,20 +1,9 @@
-/**
- * Copyright 2009 David Sanderson <mr.davidsanderson@gmail.com>
- * 
- * Licensed under the Apache License, Version 2.0 (the "License"); you may not
- * use this file except in compliance with the License. You may obtain a copy of
- * the License at
- * 
- * http://www.apache.org/licenses/LICENSE-2.0
- * 
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
- * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
- * License for the specific language governing permissions and limitations under
- * the License.
- */
-package mr.davidsanderson.uml.client;
+package mr.davidsanderson.uml.wave.gadget;
 
+import mr.davidsanderson.uml.client.GraphEventBus;
+import mr.davidsanderson.uml.client.GraphModel;
+import mr.davidsanderson.uml.client.RetrieveServer;
+import mr.davidsanderson.uml.client.UMLGraphHelper;
 import mr.davidsanderson.uml.client.impl.EditorPanelImpl;
 import mr.davidsanderson.uml.client.impl.GraphEventBusImpl;
 import mr.davidsanderson.uml.client.impl.GraphMainPanelImpl;
@@ -30,15 +19,8 @@ import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Singleton;
 import com.google.inject.name.Names;
 
-/**
- * @author dsand
- *
- */
-public class UMLGraphClientModule extends AbstractGinModule {
-
-	/* (non-Javadoc)
-	 * @see com.google.gwt.inject.client.AbstractGinModule#configure()
-	 */
+public class UMLGraphGadgetModule extends AbstractGinModule {
+	
 	@Override
 	protected void configure() {
 		bind(GraphEventBus.class).to(GraphEventBusImpl.class).in(Singleton.class);
@@ -50,7 +32,10 @@ public class UMLGraphClientModule extends AbstractGinModule {
 		bind(Widget.class).annotatedWith(Names.named("UMLEditorPanel")).to(EditorPanelImpl.class);
 		bind(Widget.class).annotatedWith(Names.named("MessagePanel")).to(MessagePanelImpl.class);
 		bind(PopupPanel.class).annotatedWith(Names.named("GraphPopupMenu")).to(GraphPopupMenuImpl.class);
-		bind(RetrieveServer.class);
+		bind(RetrieveServer.class);		
+		bind(WaveStateHandler.class);
+		bind(ResizeContainerHandler.class);
+		
 	}
 
 }

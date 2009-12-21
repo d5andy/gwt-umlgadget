@@ -12,10 +12,9 @@
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
  * License for the specific language governing permissions and limitations under
  * the License.
-  */
+ */
 package mr.davidsanderson.uml.wave.gadget;
 
-import mr.davidsanderson.uml.client.GraphMainPanel;
 import mr.davidsanderson.uml.client.RetrieveServer;
 import mr.davidsanderson.uml.client.UMLGraphService;
 import mr.davidsanderson.uml.client.UMLGraphServiceAsync;
@@ -32,32 +31,38 @@ import com.google.gwt.gadgets.client.UserPreferences;
 /**
  * Entry point classes define <code>onModuleLoad()</code>.
  */
-@Gadget.ModulePrefs(title = "umlgadget", height = 400 )
-public class UMLGraphGadget extends WaveGadget<UserPreferences> implements NeedsDynamicHeight {
+@Gadget.ModulePrefs(title = "umlgadget", height = 400)
+public class UMLGraphGadget extends WaveGadget<UserPreferences> implements
+		NeedsDynamicHeight {
 	DynamicHeightFeature feature;
 
 	@Override
 	protected void init(UserPreferences preferences) {
-		
 		Log.debug("UMLGraphGadget.init : create UI");
-		feature.getContentDiv().add(new GraphMainPanel());
-		new ResizeContainerHandler(feature);
-		Log.debug("UMLGraphGadget.init : new RetrieveServer");
-		new RetrieveServer((UMLGraphServiceAsync) GWT.create(UMLGraphService.class));
+		UMLGraphGadgetInjector injector = GWT
+				.create(UMLGraphGadgetInjector.class);
+		feature.getContentDiv().add(injector.getGraphEventMainPanel());
+
+		WaveStateHandler waveStateHandler = injector.getWaveStateHandler();
 		Log.debug("UMLGraphGadget.init : new WaveStateHandler");
-		new WaveStateHandler(getWave());
-		
+		waveStateHandler.init(getWave());
+
+		RetrieveServer retriever = injector.getRetriever();
+		Log.debug("UMLGraphGadget.init : new RetrieveServer");
+		retriever
+				.init((UMLGraphServiceAsync) GWT.create(UMLGraphService.class));
+
+		ResizeContainerHandler resizeContainer = injector.getResizeContainer();
+		resizeContainer.init(feature);
 	}
 
 	static {
 		disableStats();
 	}
 
-
 	private static native void disableStats() /*-{
 		$wnd.$stats = null;
 	}-*/;
-
 
 	@Override
 	public void initializeFeature(DynamicHeightFeature feature) {

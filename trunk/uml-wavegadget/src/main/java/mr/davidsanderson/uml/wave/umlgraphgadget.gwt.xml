@@ -10,6 +10,7 @@
 	<inherits name='org.cobogw.gwt.waveapi.gadget.WaveGadget' />
 	<inherits name="com.google.gwt.gadgets.Gadgets" />
 	<inherits name="com.allen_sauer.gwt.log.gwt-log-OFF" />
+	<inherits name="com.google.gwt.inject.Inject"/>
 	<inherits name='mr_davidsanderson_uml' />
 
 
@@ -17,7 +18,7 @@
 	<define-linker name="gadget1"
 		class="mr.davidsanderson.uml.wave.linker.GadgetLinkerGWT16" />
 	<add-linker name="gadget1" />
-
+<!--
 	<generate-with
 		class="com.google.gwt.user.rebind.rpc.UberServiceInterfaceProxyGenerator">
 		<when-type-assignable class="com.google.gwt.user.client.rpc.RemoteService" />
@@ -28,7 +29,7 @@
 	<set-property name="gwt.rpc.proxySuperclass"
 		value="com_google_gwt_user_client_rpc_impl_RpcServiceProxy" />
 
-
+-->
 	<!-- Loggers Enabled by default -->
 	<set-property name="log_ConsoleLogger" value="DISABLED" />
 	<set-property name="log_DivLogger" value="DISABLED" />

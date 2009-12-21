@@ -12,7 +12,6 @@
 	<inherits name="org.timepedia.exporter.Exporter"/>
 	<inherits name="com.google.gwt.inject.Inject"/>
 	<inherits name="com.allen_sauer.gwt.log.gwt-log-DEBUG" />
-	
 	<!-- 
 	<generate-with
 		class="com.google.gwt.user.rebind.rpc.UberServiceInterfaceProxyGenerator">
@@ -25,7 +24,7 @@
 		value="com_google_gwt_user_client_rpc_impl_RpcServiceProxy" />
 		 -->
 	<!-- Specify the app entry point class.                         -->
-	<entry-point class='mr.davidsanderson.uml.application.client.Application' />
+	<entry-point class='mr.davidsanderson.uml.application.client.ExporterEntryPoint' />
 
 	<!-- Specify the application specific style sheet.              -->
 	<stylesheet src='Application.css' />

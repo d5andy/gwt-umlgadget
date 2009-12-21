@@ -1,7 +1,10 @@
 package mr.davidsanderson.uml.application.client;
 
+import java.util.HashMap;
+
 import mr.davidsanderson.uml.client.GraphEvent;
 import mr.davidsanderson.uml.client.RetrieveServer;
+import mr.davidsanderson.uml.client.UMLGraph;
 import mr.davidsanderson.uml.client.UMLGraphInjector;
 import mr.davidsanderson.uml.client.UMLGraphService;
 import mr.davidsanderson.uml.client.UMLGraphServiceAsync;
@@ -13,7 +16,10 @@ import org.timepedia.exporter.client.Exportable;
 
 import com.allen_sauer.gwt.log.client.Log;
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.dom.client.Element;
+import com.google.gwt.dom.client.NodeList;
 import com.google.gwt.user.client.DOM;
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.RootPanel;
 
 @ExportPackage("gwt")
@@ -26,16 +32,31 @@ public class UMLGraphApplication implements Exportable {
 	public void initalise() {
 		UMLGraphInjector injector = GWT.create(UMLGraphInjector.class);
 		RootPanel.get().add(injector.getGraphEventMainPanel());
-		RetrieveServer retriever = injector.getRetriever();
-		retriever.init((UMLGraphServiceAsync)GWT.create(UMLGraphService.class));
+		
+//		RetrieveServer retriever = injector.getRetriever();
+//		retriever.init((UMLGraphServiceAsync)GWT.create(UMLGraphService.class));
+		Log.debug("get modsl.uml");
+		RootPanel params = RootPanel.get("styles.uml");
+		if (params != null) {
+			HashMap<String, String> map = new HashMap<String, String>(); 
+			NodeList<Element> elementsByTagName = params.getElement().getElementsByTagName("entry");
+			for (int i = 0; i < elementsByTagName.getLength(); i++) {
+				Element item = elementsByTagName.getItem(i);
+				map.put(item.getAttribute("key"), item.getInnerText());
+			}
+			injector.getEventBus().fireEvent(new GraphEvent(origin,new UMLGraph(map), GraphEventType.SERVICE_SUCCESS));
+						
+		}	
 		
 		Log.debug("get modsl.uml");
-		RootPanel params = RootPanel.get("modsl.uml");
+		params = RootPanel.get("modsl.uml");
 		if (params != null) {
 			String value = DOM.getInnerText(params.getElement());
 			
 			injector.getEventBus().fireEvent(new GraphEvent(origin,value, GraphEventType.CONTENT_CHANGED));
 		}
+		
+	
 		
 	}
 

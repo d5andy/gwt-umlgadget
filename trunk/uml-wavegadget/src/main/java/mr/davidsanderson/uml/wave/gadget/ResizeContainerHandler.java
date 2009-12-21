@@ -17,6 +17,7 @@ package mr.davidsanderson.uml.wave.gadget;
 
 import com.allen_sauer.gwt.log.client.Log;
 import com.google.gwt.gadgets.client.DynamicHeightFeature;
+import com.google.inject.Inject;
 
 import mr.davidsanderson.uml.client.GraphEvent;
 import mr.davidsanderson.uml.client.GraphEventBus;
@@ -29,10 +30,14 @@ import mr.davidsanderson.uml.client.GraphEvent.GraphEventType;
  */
 public class ResizeContainerHandler implements GraphEventHandler {
 	DynamicHeightFeature feature;
+
+	@Inject
+	public ResizeContainerHandler(GraphEventBus graphEventBus) {
+		graphEventBus.addHandler(this, GraphEvent.getType());
+	}
 	
-	public ResizeContainerHandler(DynamicHeightFeature feature) {
+	public void init(DynamicHeightFeature feature) {
 		this.feature = feature;
-		GraphEventBus.get().addHandler(this, GraphEvent.getType());
 	}
 
 	@Override
@@ -41,11 +46,16 @@ public class ResizeContainerHandler implements GraphEventHandler {
 
 	@Override
 	public void onEdit(GraphEvent event) {
-		if (event.getEventType().equals(GraphEventType.GRAPH_RESIZE)) {
-			Log.debug("Resize the root Panel");
-			feature.adjustHeight();			
+		if (feature != null) {
+			if (event.getEventType().equals(GraphEventType.GRAPH_RESIZE)) {
+				Log.debug("Resize the root Panel");
+				feature.adjustHeight();			
+			} else {
+				Log.debug("Miss " + event.getEventType());
+			}
+			
 		} else {
-			Log.debug("Miss " + event.getEventType());
+			Log.debug("feature not enabled " + event.getEventType());
 		}
 		
 	}

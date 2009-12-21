@@ -203,7 +203,7 @@
 					<disableCastChecking>true</disableCastChecking>
 					<disableClassMetadata>true</disableClassMetadata>				
 					<modules>
-						<value>mr.davidsanderson.uml.application.Application</value>
+					<!-- 	<value>mr.davidsanderson.uml.application.Application</value> -->
 						<value>mr.davidsanderson.uml.application.Application_Xs</value>
 					</modules>
 					<servicePattern>mr/davidsanderson/uml/client/UMLGraphService.java</servicePattern>
