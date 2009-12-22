@@ -24,7 +24,7 @@ import com.google.gwt.core.client.EntryPoint;
 public class Application implements EntryPoint {
 	
 	public void onModuleLoad() {
-		new UMLGraphApplication().initalise();
+		new AsyncGraphApplication().initalise();
 	}
 
 }

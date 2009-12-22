@@ -744,6 +744,47 @@ public class UberProxyCreator {
   }
 
   private SourceWriter getSourceWriter(TreeLogger logger, GeneratorContext ctx,
+      JClassType serviceAsync) {
+    JPackage serviceIntfPkg = serviceAsync.getPackage();
+    String packageName = serviceIntfPkg == null ? "" : serviceIntfPkg.getName();
+    PrintWriter printWriter = ctx.tryCreate(logger, packageName,
+        getProxySimpleName());
+    if (printWriter == null) {
+      return null;
+    }
+
+    ClassSourceFileComposerFactory composerFactory = new ClassSourceFileComposerFactory(
+        packageName, getProxySimpleName());
+
+    String[] imports = new String[] {
+        getProxySupertype().getCanonicalName(),
+        getStreamWriterClass().getCanonicalName(),
+        SerializationStreamWriter.class.getCanonicalName(),
+        GWT.class.getCanonicalName(), ResponseReader.class.getCanonicalName(),
+        SerializationException.class.getCanonicalName(),
+        Impl.class.getCanonicalName()};
+    for (String imp : imports) {
+      composerFactory.addImport(imp);
+    }
+    
+    String rpcSuper = null;
+    try {
+      // retrieve user-defined superclass from module file
+      rpcSuper = ctx.getPropertyOracle().getSelectionProperty(logger, "gwt.rpc.proxySuperclass").getCurrentValue();
+      if (rpcSuper != null) {
+        rpcSuper = rpcSuper.replaceAll("_", ".");
+      }
+    } catch (Exception e) {
+    	e.printStackTrace();
+    }    
+
+    composerFactory.setSuperclass(rpcSuper);
+    composerFactory.addImplementedInterface(serviceAsync.getErasedType().getQualifiedSourceName());
+
+    return composerFactory.createSourceWriter(ctx, printWriter);
+  }
+  
+  /*private SourceWriter getSourceWriter2(TreeLogger logger, GeneratorContext ctx,
 	      JClassType serviceAsync) {
 	    JPackage serviceIntfPkg = serviceAsync.getPackage();
 	    String packageName = serviceIntfPkg == null ? "" : serviceIntfPkg.getName();
@@ -785,4 +826,5 @@ public class UberProxyCreator {
 
 	    return composerFactory.createSourceWriter(ctx, printWriter);
 	  }
+  */
 }
