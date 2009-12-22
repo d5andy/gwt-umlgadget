@@ -41,19 +41,21 @@ public class UMLGraphGadget extends WaveGadget<UserPreferences> implements
 		Log.debug("UMLGraphGadget.init : create UI");
 		UMLGraphGadgetInjector injector = GWT
 				.create(UMLGraphGadgetInjector.class);
-		feature.getContentDiv().add(injector.getGraphEventMainPanel());
 
-		WaveStateHandler waveStateHandler = injector.getWaveStateHandler();
-		Log.debug("UMLGraphGadget.init : new WaveStateHandler");
-		waveStateHandler.init(getWave());
+		ResizeContainerHandler resizeContainer = injector.getResizeContainer();
+		resizeContainer.init(feature);
 
 		RetrieveServer retriever = injector.getRetriever();
 		Log.debug("UMLGraphGadget.init : new RetrieveServer");
 		retriever
 				.init((UMLGraphServiceAsync) GWT.create(UMLGraphService.class));
 
-		ResizeContainerHandler resizeContainer = injector.getResizeContainer();
-		resizeContainer.init(feature);
+		
+		feature.getContentDiv().add(injector.getGraphEventMainPanel());
+
+		WaveStateHandler waveStateHandler = injector.getWaveStateHandler();
+		Log.debug("UMLGraphGadget.init : new WaveStateHandler");
+		waveStateHandler.init(getWave());
 	}
 
 	static {

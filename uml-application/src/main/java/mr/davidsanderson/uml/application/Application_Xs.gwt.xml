@@ -11,18 +11,8 @@
 	<inherits name="com.googlecode.gwtx.Java" />
 	<inherits name="org.timepedia.exporter.Exporter"/>
 	<inherits name="com.google.gwt.inject.Inject"/>
-	<inherits name="com.allen_sauer.gwt.log.gwt-log-DEBUG" />
-	<!-- 
-	<generate-with
-		class="com.google.gwt.user.rebind.rpc.UberServiceInterfaceProxyGenerator">
-		<when-type-assignable class="com.google.gwt.user.client.rpc.RemoteService" />
-
-	</generate-with>
-	<define-property name="gwt.rpc.proxySuperclass"
-		values="com_google_gwt_user_client_rpc_impl_RpcServiceProxy" />
-	<set-property name="gwt.rpc.proxySuperclass"
-		value="com_google_gwt_user_client_rpc_impl_RpcServiceProxy" />
-		 -->
+	<inherits name="com.allen_sauer.gwt.log.gwt-log-OFF" />
+	 
 	<!-- Specify the app entry point class.                         -->
 	<entry-point class='mr.davidsanderson.uml.application.client.ExporterEntryPoint' />
 

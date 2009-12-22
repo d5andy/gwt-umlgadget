@@ -20,20 +20,19 @@
 
 	</properties>
 
+
 	<dependencies>
 
 		<!--  GWT dependencies (from central repo) -->
 		<dependency>
 			<groupId>com.google.gwt</groupId>
 			<artifactId>gwt-dev</artifactId>
-			<version>2.0.0</version>
-			<scope>provided</scope>
+			<version>${gwt.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>com.google.gwt</groupId>
 			<artifactId>gwt-servlet</artifactId>
 			<version>${gwt.version}</version>
-			<scope>runtime</scope>
 		</dependency>
 		<dependency>
 			<groupId>com.google.gwt</groupId>
@@ -56,24 +55,25 @@
 			<artifactId>gwt-g2d</artifactId>
 			<version>0.0.1</version>
 			<scope>system</scope>
-			<systemPath>${basedir}/lib/gwt-g2d.jar</systemPath>
-		</dependency>
-		<dependency>
-			<groupId>log4j</groupId>
-			<artifactId>log4j</artifactId>
-			<version>1.2.14</version>
+			<systemPath>C:/dev/googlecode/gwt-umlgadget/uml-module/lib/gwt-g2d.jar</systemPath>
 		</dependency>
 		<dependency>
 			<groupId>com.google.code.gwtx</groupId>
 			<artifactId>gwtx</artifactId>
 			<version>1.5.2</version>
+			<exclusions>
+				<exclusion>
+					<groupId>com.google.gwt</groupId>
+					<artifactId>gwt-user</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 		<dependency>
 			<groupId>com.google.gwt</groupId>
 			<artifactId>gwt-log</artifactId>
 			<version>2.6.2</version>
 			<scope>system</scope>
-			<systemPath>${basedir}/lib/gwt-log-2.6.2.jar</systemPath>
+			<systemPath>C:/dev/googlecode/gwt-umlgadget/uml-module/lib/gwt-log-2.6.2.jar</systemPath>
 		</dependency>
 		<dependency>
 			<groupId>aopalliance</groupId>
@@ -90,7 +90,6 @@
 			<artifactId>google-gin</artifactId>
 			<version>1.0-SNAPSHOT</version>
 		</dependency>
-
 	</dependencies>
 
 	<build>
@@ -122,7 +121,6 @@
 		<profile>
 			<id>application</id>
 			<build>
-
 				<plugins>
 
 					<plugin>
@@ -130,7 +128,6 @@
 						<artifactId>gwt-maven-plugin</artifactId>
 						<version>1.2-SNAPSHOT</version>
 						<configuration>
-							
 							<disableCastChecking>true</disableCastChecking>
 							<disableClassMetadata>true</disableClassMetadata>
 						</configuration>

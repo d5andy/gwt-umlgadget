@@ -18,7 +18,7 @@
 	<servlet-mapping>
 		<servlet-name>umlGraphService</servlet-name>
 		<url-pattern>/umlapplication/umlGraphService</url-pattern>
-	</servlet-mapping>
+	</servlet-mapping><!--
 	
 	<servlet>
 		<servlet-name>gwt-log-remote-logger-servlet</servlet-name>
@@ -30,7 +30,7 @@
 		<url-pattern>/umlapplication/gwt-log</url-pattern>
 	</servlet-mapping>
 	
-	<servlet>
+	--><servlet>
 		<servlet-name>applicationServlet</servlet-name>
 		<servlet-class>mr.davidsanderson.uml.server.ApplicationServlet</servlet-class>
 	</servlet>

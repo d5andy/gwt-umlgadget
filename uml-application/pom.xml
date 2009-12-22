@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-	<!--
-    GWT-Maven archetype generated POM
-  -->
+
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>mr.davidsanderson.uml</groupId>
 	<artifactId>uml-application</artifactId>
@@ -14,6 +12,7 @@
 	<properties>
 
 		<!-- convenience to define GWT version in one place -->
+		<gwtVersion>2.0.0</gwtVersion>
 		<gwt.version>2.0.0</gwt.version>
 
 		<!--  tell the compiler we can use 1.5 -->
@@ -100,32 +99,33 @@
 	</profiles>
 
 	<dependencies>
-
-		<!--  GWT dependencies (from central repo) -->
+		<dependency>
+			<groupId>com.google.gwt</groupId>
+			<artifactId>gwt-dev</artifactId>
+			<version>${gwt.version}</version>
+		</dependency>
 		<dependency>
 			<groupId>com.google.gwt</groupId>
 			<artifactId>gwt-servlet</artifactId>
 			<version>${gwt.version}</version>
-			<scope>runtime</scope>
 		</dependency>
 		<dependency>
 			<groupId>com.google.gwt</groupId>
 			<artifactId>gwt-user</artifactId>
 			<version>${gwt.version}</version>
-			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>com.google.gwt.google-apis</groupId>
 			<artifactId>gwt-gadgets</artifactId>
 			<version>1.0.3</version>
+			<exclusions>
+				<exclusion>
+					<groupId>com.google.gwt</groupId>
+					<artifactId>gwt-user</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
-		<dependency>
-			<groupId>com.google.gwt</groupId>
-			<artifactId>gwt-dev</artifactId>
-			<version>2.0.0</version>
-			<scope>system</scope>
-			<systemPath>C:/java/gwt-2.0.0/gwt-dev.jar</systemPath>
-		</dependency>
+
 		<!-- test -->
 		<dependency>
 			<groupId>junit</groupId>
@@ -139,11 +139,7 @@
 			<artifactId>uml-module</artifactId>
 			<version>1.0-SNAPSHOT</version>
 		</dependency>
-		<dependency>
-			<groupId>mr.davidsanderson.uml</groupId>
-			<artifactId>gwt-antlr</artifactId>
-			<version>1.0-SNAPSHOT</version>
-		</dependency>
+
 
 		<dependency>
 			<groupId>com.google.gwt</groupId>
@@ -160,35 +156,18 @@
 			<systemPath>${basedir}/lib/gwt-log-2.6.2.jar</systemPath>
 		</dependency>
 		<dependency>
-			<groupId>com.google.code.gwtx</groupId>
-			<artifactId>gwtx</artifactId>
-			<version>1.5.2</version>
-		</dependency>
-		<dependency>
 			<groupId>org.timepedia.exporter</groupId>
 			<artifactId>gwtexporter</artifactId>
 			<version>2.06</version>
+			<exclusions>
+				<exclusion>
+					<groupId>com.google.gwt</groupId>
+					<artifactId>gwt-user</artifactId>
+				</exclusion>
+			</exclusions>
+			
 		</dependency>
-		<dependency>
-			<groupId>log4j</groupId>
-			<artifactId>log4j</artifactId>
-			<version>1.2.14</version>
-		</dependency>
-		<dependency>
-			<groupId>aopalliance</groupId>
-			<artifactId>aopalliance</artifactId>
-			<version>1.0</version>
-		</dependency>
-		<dependency>
-			<groupId>com.google.code.guice</groupId>
-			<artifactId>guice</artifactId>
-			<version>2.0.1</version>
-		</dependency>
-		<dependency>
-			<groupId>com.google.gwt</groupId>
-			<artifactId>google-gin</artifactId>
-			<version>1.0-SNAPSHOT</version>
-		</dependency>
+
 	</dependencies>
 
 	<build>
@@ -199,7 +178,6 @@
 				<artifactId>gwt-maven-plugin</artifactId>
 				<version>1.2-SNAPSHOT</version>
 				<configuration>
-					<gwtHome>${gwtHome}</gwtHome>
 					<disableCastChecking>true</disableCastChecking>
 					<disableClassMetadata>true</disableClassMetadata>				
 					<modules>
@@ -213,8 +191,6 @@
 						<goals>
 							<goal>resources</goal>
 							<goal>compile</goal>
-							<goal>generateAsync</goal>
-							<goal>test</goal>
 						</goals>
 					</execution>
 				</executions>
