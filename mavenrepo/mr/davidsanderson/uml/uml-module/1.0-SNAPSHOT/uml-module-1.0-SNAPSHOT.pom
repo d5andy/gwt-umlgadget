@@ -24,7 +24,7 @@
         <repository>
             <uniqueVersion>false</uniqueVersion>
             <id>uml-deploy</id>
-            <url>svn:https://gwt-umlgadget.googlecode.com/svn/trunk/mavenrepo/
+            <url>svn:https://gwt-umlgadget.googlecode.com/svn/mavenrepo/
             </url>
         </repository>
     </distributionManagement>
@@ -61,9 +61,7 @@
 		<dependency>
 			<groupId>com.google.gwt</groupId>
 			<artifactId>gwt-g2d</artifactId>
-			<version>0.0.1</version>
-			<scope>system</scope>
-			<systemPath>C:/dev/googlecode/gwt-umlgadget/uml-module/lib/gwt-g2d.jar</systemPath>
+			<version>0.0.3</version>
 		</dependency>
 		<dependency>
 			<groupId>com.google.code.gwtx</groupId>
@@ -80,8 +78,6 @@
 			<groupId>com.google.gwt</groupId>
 			<artifactId>gwt-log</artifactId>
 			<version>2.6.2</version>
-			<scope>system</scope>
-			<systemPath>C:/dev/googlecode/gwt-umlgadget/uml-module/lib/gwt-log-2.6.2.jar</systemPath>
 		</dependency>
 		<dependency>
 			<groupId>aopalliance</groupId>
@@ -192,6 +188,10 @@
 		<repository>
 			<id>timefire</id>
 			<url>http://timefire-repository.googlecode.com/svn/mavenrepo/</url>
+		</repository>
+		<repository>
+			<id>uml-gwt</id>
+			<url>http://gwt-umlgadget.googlecode.com/svn/mavenrepo/</url>
 		</repository>
 	</repositories>
 </project>
