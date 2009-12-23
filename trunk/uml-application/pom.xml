@@ -6,20 +6,14 @@
 	<groupId>mr.davidsanderson.uml</groupId>
 	<artifactId>uml-application</artifactId>
 	<packaging>war</packaging>
-	<version>1.0-SNAPSHOT</version>
 	<name>uml-application</name>
 
-	<properties>
-
-		<!-- convenience to define GWT version in one place -->
-		<gwtVersion>2.0.0</gwtVersion>
-		<gwt.version>2.0.0</gwt.version>
-
-		<!--  tell the compiler we can use 1.5 -->
-		<maven.compiler.source>1.6</maven.compiler.source>
-		<maven.compiler.target>1.6</maven.compiler.target>
-
-	</properties>
+	<parent>
+		<groupId>mr.davidsanderson.uml</groupId>
+		<artifactId>uml-root</artifactId>
+		<version>1.0-SNAPSHOT</version>
+		<relativePath>../pom.xml</relativePath>
+	</parent>
 
 	<profiles>
 		<profile>
@@ -107,21 +101,6 @@
 			<version>1.0-SNAPSHOT</version>
 		</dependency>
 
-
-		<dependency>
-			<groupId>com.google.gwt</groupId>
-			<artifactId>gwt-g2d</artifactId>
-			<version>0.0.1</version>
-			<scope>system</scope>
-			<systemPath>${basedir}/lib/gwt-g2d.jar</systemPath>
-		</dependency>
-		<dependency>
-			<groupId>com.google.gwt</groupId>
-			<artifactId>gwt-log</artifactId>
-			<version>3.0.0</version>
-			<scope>system</scope>
-			<systemPath>${basedir}/lib/gwt-log-2.6.2.jar</systemPath>
-		</dependency>
 		<dependency>
 			<groupId>org.timepedia.exporter</groupId>
 			<artifactId>gwtexporter</artifactId>
@@ -149,7 +128,7 @@
 					<disableClassMetadata>true</disableClassMetadata>				
 					<modules>
 					<!-- 	<value>mr.davidsanderson.uml.application.Application</value> -->
-						<value>mr.davidsanderson.uml.application.Application_Xs</value>
+						<value>mr.davidsanderson.uml.application.Application</value>
 					</modules>
 					<servicePattern>mr/davidsanderson/uml/client/UMLGraphService.java</servicePattern>
 				</configuration>
@@ -189,30 +168,5 @@
 			</plugin>
 		</plugins>
 	</build>
-	<pluginRepositories>
-		<pluginRepository>
-			<id>gwt-maven</id>
-			<url>http://gwt-maven.googlecode.com/svn/trunk/mavenrepo/</url>
-		</pluginRepository>
-	</pluginRepositories>
-	<repositories>
-		<repository>
-			<id>nomal</id>
-			<url>http://ukfawbld5:8081/repo/</url>
-		</repository>
-		<repository>
-			<id>gwt-maven</id>
-			<url>http://gwt-maven.googlecode.com/svn/trunk/mavenrepo/</url>
-		</repository>
-		<repository>
-			<id>maven2-repository.dev.java.net</id>
-			<name>Java.net Repository for Maven</name>
-			<url>http://download.java.net/maven/2/</url>
-		</repository>
-		<repository>
-			<id>timefire</id>
-			<url>http://timefire-repository.googlecode.com/svn/mavenrepo/</url>
-		</repository>
-	</repositories>
 
 </project>
