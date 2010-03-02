@@ -3,9 +3,10 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <groupId>com.google.gwt</groupId>
   <artifactId>gwt-g2d</artifactId>
-  <version>0.0.4</version>
+  <version>0.0.6</version>
   <versioning>
     <versions>
+      <version>0.0.6</version>
       <version>0.0.4</version>
       <version>0.0.3</version>
     </versions>
