@@ -52,7 +52,7 @@ public class Application implements EntryPoint {
 		
 		RootPanel.get().add(injector.getGraphEventMainPanel());
 		
-		injector.getRetriever().init((UMLGraphServiceAsync)GWT.create(UMLGraphService.class));
+//		injector.getRetriever().init((UMLGraphServiceAsync)GWT.create(UMLGraphService.class));
 		
 		Log.debug("get modsl.uml");
 		RootPanel params = RootPanel.get("modsl.uml");

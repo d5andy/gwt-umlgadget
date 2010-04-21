@@ -33,13 +33,6 @@ public interface UMLGraphInjector extends Ginjector {
 	 */
 	GraphMainPanelImpl getGraphEventMainPanel();
 	
-	
-	/**
-	 * get the RPC server retriever implementation.
-	 * @return
-	 */
-	RetrieveServer getRetriever();
-	
 	/**
 	 * Get the application event bus. 
 	 * @return
