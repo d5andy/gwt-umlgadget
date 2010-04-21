@@ -50,7 +50,7 @@ public class UMLGraphClientModule extends AbstractGinModule {
 		bind(Widget.class).annotatedWith(Names.named("UMLEditorPanel")).to(EditorPanelImpl.class);
 		bind(Widget.class).annotatedWith(Names.named("MessagePanel")).to(MessagePanelImpl.class);
 		bind(PopupPanel.class).annotatedWith(Names.named("GraphPopupMenu")).to(GraphPopupMenuImpl.class);
-		bind(RetrieveServer.class);
+
 	}
 
 }
