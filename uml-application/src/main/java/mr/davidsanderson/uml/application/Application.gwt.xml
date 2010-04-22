@@ -2,7 +2,7 @@
 <module rename-to='umlapplication'>
 	<!-- Inherit the core Web Toolkit stuff.                        -->
 	<inherits name='com.google.gwt.user.User' />
-
+	<inherits name="com.google.gwt.resources.Resources" />
 	<!--  inherit css based theme -->
 	<inherits name='com.google.gwt.user.theme.standard.Standard' />
 	<inherits name='gwt.g2d.g2d' />
@@ -10,7 +10,8 @@
 	<inherits name='org.antlr.antlr' />
 	<inherits name="com.googlecode.gwtx.Java" />
 	<inherits name="org.timepedia.exporter.Exporter"/>
-	<inherits name="com.allen_sauer.gwt.log.gwt-log-OFF" />
+	<inherits name="com.allen_sauer.gwt.log.gwt-log-DEBUG" />
+	<extend-property name="log_level" values="DEBUG"/>
 	<inherits name="com.google.gwt.inject.Inject"/>
 	<!-- inherits name="com.google.gwt.i18n.I18N"/-->
 
@@ -19,11 +20,11 @@
 
 	<!-- Specify the application specific style sheet.              -->
 	<stylesheet src='Application.css' />
-	<set-property name="log_ConsoleLogger" value="DISABLED" />
-	<set-property name="log_DivLogger" value="DISABLED" />
-	<set-property name="log_FirebugLogger" value="DISABLED" />
-	<set-property name="log_GWTLogger" value="DISABLED" />
-	<set-property name="log_SystemLogger" value="DISABLED" />
+	<set-property name="log_ConsoleLogger" value="ENABLED" />
+	<set-property name="log_DivLogger" value="ENABLED" />
+	<set-property name="log_FirebugLogger" value="ENABLED" />
+	<set-property name="log_GWTLogger" value="ENABLED" />
+	<set-property name="log_SystemLogger" value="ENABLED" />
 	<set-configuration-property name="log_pattern"
 		value="%d [%-5p] %m%n" />
 	<source path="client">

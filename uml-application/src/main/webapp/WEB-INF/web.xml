@@ -9,17 +9,6 @@
 		<welcome-file>index.html</welcome-file>
 	</welcome-file-list>
 
-	<!-- Servlets -->
-	<servlet>
-		<servlet-name>umlGraphService</servlet-name>
-		<servlet-class>mr.davidsanderson.uml.server.UMLGraphServiceImpl</servlet-class>
-	</servlet>
-
-	<servlet-mapping>
-		<servlet-name>umlGraphService</servlet-name>
-		<url-pattern>/umlapplication/umlGraphService</url-pattern>
-	</servlet-mapping><!--
-	
 	<servlet>
 		<servlet-name>gwt-log-remote-logger-servlet</servlet-name>
 		<servlet-class>com.allen_sauer.gwt.log.server.RemoteLoggerServiceImpl</servlet-class>
@@ -29,16 +18,5 @@
 		<servlet-name>gwt-log-remote-logger-servlet</servlet-name>
 		<url-pattern>/umlapplication/gwt-log</url-pattern>
 	</servlet-mapping>
-	
-	--><servlet>
-		<servlet-name>applicationServlet</servlet-name>
-		<servlet-class>mr.davidsanderson.uml.server.ApplicationServlet</servlet-class>
-	</servlet>
-
-	<servlet-mapping>
-		<servlet-name>applicationServlet</servlet-name>
-		<url-pattern>/umlapplication/applicationServlet</url-pattern>
-	</servlet-mapping>
-	
 
 </web-app>

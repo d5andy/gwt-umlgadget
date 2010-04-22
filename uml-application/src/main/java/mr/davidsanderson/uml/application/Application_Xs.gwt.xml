@@ -2,7 +2,6 @@
 <module rename-to='umlapplicationxs'>
 	<!-- Inherit the core Web Toolkit stuff.                        -->
 	<inherits name='com.google.gwt.user.User' />
-
 	<!--  inherit css based theme -->
 	<inherits name='com.google.gwt.user.theme.standard.Standard' />
 	<inherits name='gwt.g2d.g2d' />
@@ -18,7 +17,7 @@
 
 	<!-- Specify the application specific style sheet.              -->
 	<stylesheet src='Application.css' />
-	<set-property name="log_ConsoleLogger" value="ENABLED" />
+	<set-property name="log_ConsoleLogger" value="DISABLED" />
 	<set-property name="log_DivLogger" value="DISABLED" />
 	<set-property name="log_FirebugLogger" value="DISABLED" />
 	<set-property name="log_GWTLogger" value="DISABLED" />
@@ -30,6 +29,4 @@
 		<include name="**/*" />
 	</source>
 	<add-linker name="xs"/>
-
-
 </module>
