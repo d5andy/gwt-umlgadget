@@ -10,6 +10,9 @@
         <dependent-module deploy-path="/WEB-INF/lib" handle="module:/resource/gwt-antlr/gwt-antlr">
             <dependency-type>uses</dependency-type>
         </dependent-module>
+        <dependent-module deploy-path="/WEB-INF/lib" handle="module:/resource/gwtexporter/gwtexporter">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
         <property name="context-root" value="uml-application"/>
         <property name="java-output-path"/>
     </wb-module>

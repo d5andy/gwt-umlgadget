@@ -13,10 +13,11 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package mr.davidsanderson.uml.application.client;
+package mr.davidsanderson.uml.application.async;
 
 
 import com.google.gwt.core.client.EntryPoint;
+import com.google.gwt.user.client.Window;
 
 /**
  * Entry point classes define <code>onModuleLoad()</code>.
@@ -24,7 +25,8 @@ import com.google.gwt.core.client.EntryPoint;
 public class Application implements EntryPoint {
 	
 	public void onModuleLoad() {
-		new AsyncGraphApplication().initalise();
+//		Window.alert(Resources.INSTANCE.getUMLProperties().getText());
+//		new AsyncGraphApplication().initalise();
 	}
 
 }

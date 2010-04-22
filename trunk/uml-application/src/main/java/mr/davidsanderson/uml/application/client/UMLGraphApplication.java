@@ -3,11 +3,8 @@ package mr.davidsanderson.uml.application.client;
 import java.util.HashMap;
 
 import mr.davidsanderson.uml.client.GraphEvent;
-import mr.davidsanderson.uml.client.RetrieveServer;
 import mr.davidsanderson.uml.client.UMLGraph;
 import mr.davidsanderson.uml.client.UMLGraphInjector;
-import mr.davidsanderson.uml.client.UMLGraphService;
-import mr.davidsanderson.uml.client.UMLGraphServiceAsync;
 import mr.davidsanderson.uml.client.GraphEvent.GraphEventType;
 
 import org.timepedia.exporter.client.Export;
@@ -19,11 +16,9 @@ import com.google.gwt.core.client.GWT;
 import com.google.gwt.dom.client.Element;
 import com.google.gwt.dom.client.NodeList;
 import com.google.gwt.user.client.DOM;
-import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.RootPanel;
 
 @ExportPackage("gwt")
-@Export
 public class UMLGraphApplication implements Exportable {
 	
 	private static final String origin = "mrdavidsanderson.UMLGraphApplication";
@@ -33,11 +28,9 @@ public class UMLGraphApplication implements Exportable {
 		UMLGraphInjector injector = GWT.create(UMLGraphInjector.class);
 		RootPanel.get().add(injector.getGraphEventMainPanel());
 		
-//		RetrieveServer retriever = injector.getRetriever();
-//		retriever.init((UMLGraphServiceAsync)GWT.create(UMLGraphService.class));
-		Log.debug("get modsl.uml");
 		RootPanel params = RootPanel.get("styles.uml");
 		if (params != null) {
+			Log.debug("found styles.uml");
 			HashMap<String, String> map = new HashMap<String, String>(); 
 			NodeList<Element> elementsByTagName = params.getElement().getElementsByTagName("entry");
 			for (int i = 0; i < elementsByTagName.getLength(); i++) {
@@ -55,9 +48,6 @@ public class UMLGraphApplication implements Exportable {
 			
 			injector.getEventBus().fireEvent(new GraphEvent(origin,value, GraphEventType.CONTENT_CHANGED));
 		}
-		
-	
-		
 	}
 
 }

@@ -104,7 +104,7 @@
 		<dependency>
 			<groupId>org.timepedia.exporter</groupId>
 			<artifactId>gwtexporter</artifactId>
-			<version>2.0.10</version>
+			<version>2.11</version>
 			<exclusions>
 				<exclusion>
 					<groupId>com.google.gwt</groupId>
@@ -113,6 +113,13 @@
 			</exclusions>
 			
 		</dependency>
+		<dependency>
+			<groupId>org.timepedia.exporter</groupId>
+			<artifactId>gwtexporter</artifactId>
+			<version>2.11</version>
+			<classifier>sources</classifier>
+			
+		</dependency>		
 
 	</dependencies>
 
@@ -127,10 +134,12 @@
 					<disableCastChecking>true</disableCastChecking>
 					<disableClassMetadata>true</disableClassMetadata>				
 					<modules>
-					<!-- 	<value>mr.davidsanderson.uml.application.Application</value> -->
-						<value>mr.davidsanderson.uml.application.Application</value>
+					<!-- 	<value>mr.davidsanderson.uml.application.Application_Xs</value> -->
+						<value>mr.davidsanderson.uml.application.Application_Xs</value>
 					</modules>
+					<!-- 
 					<servicePattern>mr/davidsanderson/uml/client/UMLGraphService.java</servicePattern>
+					 -->
 				</configuration>
 				<executions>
 					<execution>
