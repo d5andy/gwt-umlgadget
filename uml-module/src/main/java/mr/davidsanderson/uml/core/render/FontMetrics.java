@@ -15,18 +15,18 @@
   */
 package mr.davidsanderson.uml.core.render;
 
-import gwt.g2d.client.graphics.canvas.CanvasAdapter;
+import gwt.g2d.client.graphics.canvas.Context;
 
 public class FontMetrics {
 
 	private static FontMetrics instance;
-	private CanvasAdapter canvas;
+	private Context canvas;
 
-	private FontMetrics(CanvasAdapter canvas) {
+	private FontMetrics(Context canvas) {
 		this.canvas = canvas;
 	}
 	
-	public static void initialise(CanvasAdapter canvas) {
+	public static void initialise(Context canvas) {
 		instance = new FontMetrics(canvas);
 	}
 	
