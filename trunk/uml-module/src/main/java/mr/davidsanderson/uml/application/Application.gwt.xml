@@ -9,12 +9,12 @@
 	<inherits name='mr_davidsanderson_uml' />
 	<inherits name='org.antlr.antlr' />
 	<inherits name="com.googlecode.gwtx.Java" />
-	<inherits name="com.allen_sauer.gwt.log.gwt-log-DEBUG" />
+	<inherits name="org.timepedia.exporter.Exporter"/>
 	<inherits name="com.google.gwt.inject.Inject"/>
-	<inherits name="com.google.gwt.i18n.I18N"/>
+	<inherits name="com.allen_sauer.gwt.log.gwt-log-DEBUG" />
 
 	<!-- Specify the app entry point class.                         -->
-	<entry-point class='mr.davidsanderson.uml.application.client.Application' />
+	<entry-point class='mr.davidsanderson.uml.application.client.ExporterEntryPoint' />
 
 	<!-- Specify the application specific style sheet.              -->
 	<stylesheet src='Application.css' />
@@ -23,11 +23,12 @@
 	<set-property name="log_FirebugLogger" value="DISABLED" />
 	<set-property name="log_GWTLogger" value="DISABLED" />
 	<set-property name="log_SystemLogger" value="DISABLED" />
+	<set-property name="export" value="yes"/>
 	<set-configuration-property name="log_pattern"
 		value="%d [%-5p] %m%n" />
 	<source path="client">
 		<include name="**/*" />
 	</source>
-
+	<add-linker name="xs"/>
 
 </module>

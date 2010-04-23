@@ -11,16 +11,6 @@
 
 	<!-- Servlets -->
 	<servlet>
-		<servlet-name>umlGraphService</servlet-name>
-		<servlet-class>mr.davidsanderson.uml.server.UMLGraphServiceImpl</servlet-class>
-	</servlet>
-
-	<servlet-mapping>
-		<servlet-name>umlGraphService</servlet-name>
-		<url-pattern>/umlapplication/umlGraphService</url-pattern>
-	</servlet-mapping>
-	
-	<servlet>
 		<servlet-name>gwt-log-remote-logger-servlet</servlet-name>
 		<servlet-class>com.allen_sauer.gwt.log.server.RemoteLoggerServiceImpl</servlet-class>
 	</servlet>

@@ -20,39 +20,59 @@ import mr.davidsanderson.uml.client.GraphEventBus;
 import mr.davidsanderson.uml.client.GraphEvent.GraphEventType;
 
 import com.allen_sauer.gwt.log.client.Log;
+import com.google.gwt.core.client.GWT;
+import com.google.gwt.uibinder.client.UiBinder;
+import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.Command;
 import com.google.gwt.user.client.ui.MenuBar;
 import com.google.gwt.user.client.ui.MenuItem;
 import com.google.gwt.user.client.ui.PopupPanel;
+import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
 
-public class GraphPopupMenuImpl  extends PopupPanel {
+public class GraphPopupMenuImpl extends PopupPanel {
 
-private static final String origin = GraphPopupMenuImpl.class.getName();
+	private static final String origin = GraphPopupMenuImpl.class.getName();
 
-/**
- * constructor.
- */
-@Inject
-public GraphPopupMenuImpl(final GraphEventBus graphEventBus) {
-	super(true);
-	Log.debug("GraphPopupMenu : constructor");
-	this.setStyleName("popup");
-	MenuBar popupMenuBar = new MenuBar(true);
-	MenuItem alertItem = new MenuItem("Edit ModSL UML", true, new Command() {
+	interface MyUiBinder extends UiBinder<Widget, GraphPopupMenuImpl> {
+	}
+
+	private static MyUiBinder uiBinder = GWT.create(MyUiBinder.class);
+	@UiField
+	MenuItem edit;
+	@UiField
+	MenuItem image;
+	@UiField
+	MenuItem msgs;
+	GraphEventBus graphEventBus;
+
+	/**
+	 * constructor.
+	 */
+	@Inject
+	public GraphPopupMenuImpl(final GraphEventBus graphEventBus) {
+		super(true);
+		this.graphEventBus = graphEventBus;
+		this.setStyleName("popup");
+		setWidget(uiBinder.createAndBindUi(this));
+		edit.setCommand(editCommand);
+		image.setCommand(imageCommand);
+		msgs.setCommand(msgsCommand);
+	}
+	
+	Command editCommand = new Command() {
 
 		@Override
 		public void execute() {
 			Log.debug("GraphPopupMenu : show ModSL UML fire event.");
-			graphEventBus.fireEvent(new GraphEvent(origin, GraphEventType.EDITOR_OPEN));
+			graphEventBus.fireEvent(new GraphEvent(origin,
+					GraphEventType.EDITOR_OPEN));
 			Log.debug("GraphPopupMenu : show ModSL UML hide.");
 			GraphPopupMenuImpl.this.hide();
 		}
 		
-	});
-	alertItem.addStyleName("popup-item");
-	popupMenuBar.addItem(alertItem);
-	MenuItem saveItem = new MenuItem("Save as image", true, new Command() {
+	};
+	Command imageCommand = new Command() {
 
 		@Override
 		public void execute() {
@@ -62,10 +82,8 @@ public GraphPopupMenuImpl(final GraphEventBus graphEventBus) {
 			GraphPopupMenuImpl.this.hide();
 		}
 		
-	});
-	saveItem.addStyleName("popup-item");
-//	popupMenuBar.addItem(saveItem);
-	MenuItem msgItem = new MenuItem("Help - View Messages", true, new Command() {
+	};
+	Command msgsCommand = new Command() {
 
 		@Override
 		public void execute() {
@@ -75,12 +93,6 @@ public GraphPopupMenuImpl(final GraphEventBus graphEventBus) {
 			GraphPopupMenuImpl.this.hide();
 		}
 		
-	});
-	msgItem.addStyleName("popup-item");
-	popupMenuBar.addItem(msgItem);		
-	popupMenuBar.setVisible(true);
-	this.add(popupMenuBar);
-			
-}
+	};	
 
 }

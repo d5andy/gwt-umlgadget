@@ -34,6 +34,9 @@ import com.allen_sauer.gwt.log.client.Log;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.Window;
+import com.google.gwt.user.client.ui.FlowPanel;
+import com.google.gwt.user.client.ui.Image;
+import com.google.gwt.user.client.ui.Panel;
 import com.google.gwt.user.client.ui.PopupPanel;
 import com.google.inject.Inject;
 import com.google.inject.name.Named;
@@ -57,7 +60,9 @@ public class GraphSurfaceImpl extends Surface {
 		this.graphHelper = graphHelper;
 		this.model = model;
 //		setSize("100%", "100%");
-		FontMetrics.initialise(getCanvas());
+		FontMetrics.initialise(getContext());
+		
+		
 		Log.debug("GraphSurface : constructor");
 		String text = "Starting....";
 		
@@ -96,7 +101,12 @@ public class GraphSurfaceImpl extends Surface {
 		public void onEdit(GraphEvent event) {
 			// TODO Auto-generated method stub
 			if (event.getEventType().equals(GraphEventType.SAVE)) {
-				Window.alert("To be implemented");
+				
+				PopupPanel imagePanel = new PopupPanel();
+				imagePanel.clear();
+                imagePanel.add(new Image(getCanvas().toDataURL()));
+                imagePanel.setAutoHideEnabled(true);
+                imagePanel.show();
 			}
 		}
 

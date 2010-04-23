@@ -21,8 +21,8 @@ import java.util.Map;
 
 import mr.davidsanderson.uml.client.GraphEventBus;
 
-import com.google.gwt.core.client.GWT;
-import com.google.gwt.core.client.RunAsyncCallback;
+//import com.google.gwt.core.client.GWT;
+//import com.google.gwt.core.client.RunAsyncCallback;
 import com.google.inject.Inject;
 
 /**
@@ -46,20 +46,20 @@ public class AyncGraphHelperImpl extends UMLGraphHelperImpl {
 	@Override
 	public void drawDiagram(final String xmlContent, final Map<String, String> styles,
 			final Surface surface) {
-		GWT.runAsync(new RunAsyncCallback() {
-
-			@Override
-			public void onFailure(Throwable arg0) {
-				// TODO Auto-generated method stub
-				
-			}
-
-			@Override
-			public void onSuccess() {
-				// TODO Auto-generated method stub
-				AyncGraphHelperImpl.super.drawDiagram(xmlContent, styles, surface);
-			}
-		});		
+//		GWT.runAsync(new RunAsyncCallback() {
+//
+//			@Override
+//			public void onFailure(Throwable arg0) {
+//				// TODO Auto-generated method stub
+//				
+//			}
+//
+//			@Override
+//			public void onSuccess() {
+//				// TODO Auto-generated method stub
+//				AyncGraphHelperImpl.super.drawDiagram(xmlContent, styles, surface);
+//			}
+//		});		
 		
 	}
 
