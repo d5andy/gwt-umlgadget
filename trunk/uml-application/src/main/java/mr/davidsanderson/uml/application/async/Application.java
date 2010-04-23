@@ -15,7 +15,6 @@
  */
 package mr.davidsanderson.uml.application.async;
 
-
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.user.client.Window;
 
@@ -23,10 +22,10 @@ import com.google.gwt.user.client.Window;
  * Entry point classes define <code>onModuleLoad()</code>.
  */
 public class Application implements EntryPoint {
-	
+
 	public void onModuleLoad() {
-//		Window.alert(Resources.INSTANCE.getUMLProperties().getText());
-//		new AsyncGraphApplication().initalise();
+		// Window.alert(Resources.INSTANCE.getUMLProperties().getText());
+		// new AsyncGraphApplication().initalise();
 	}
 
 }

@@ -2,6 +2,7 @@
 <module rename-to='umlapplicationxs'>
 	<!-- Inherit the core Web Toolkit stuff.                        -->
 	<inherits name='com.google.gwt.user.User' />
+	
 	<!--  inherit css based theme -->
 	<inherits name='com.google.gwt.user.theme.standard.Standard' />
 	<inherits name='gwt.g2d.g2d' />
